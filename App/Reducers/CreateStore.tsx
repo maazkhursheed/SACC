@@ -1,12 +1,13 @@
 import Reactotron from "reactotron-react-native";
 import { applyMiddleware, compose, createStore, Reducer } from "redux";
 import { createEpicMiddleware, Epic } from "redux-observable";
-import { Api } from "~root/Services/Api";
 import Config from "../Config/DebugConfig";
+import { Api } from "../Services/Api";
 import ScreenTracking from "./ScreenTrackingMiddleware";
 
 export interface IDependencies {
   api: Api;
+  db: any;
   store: () => any;
 }
 

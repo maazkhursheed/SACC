@@ -1,6 +1,8 @@
 import moment, { MomentInput } from "moment";
 import * as R from "ramda";
+import * as RA from "ramda-adjunct";
 import { Dimensions, Platform } from "react-native";
+import DeviceInfo from "react-native-device-info";
 import { getDigitsNumberLength, getFractionNumberLength } from "../ProductHelper";
 
 /**
@@ -115,4 +117,25 @@ export const isNumberRangeValid = (number: Number, maxDigits: Number, maxPrecisi
   const length = getDigitsNumberLength(number);
   const precision = getFractionNumberLength(number);
   return !(Number(length) > maxDigits || precision > maxPrecision);
+};
+
+export const isDisplayWithNotch = () => DeviceInfo.hasNotch();
+
+export const generateURIfromObject = R.compose(R.join("&"), R.map(R.join("=")), R.reject(R.compose(RA.isNilOrEmpty, R.last)), R.toPairs);
+
+export const sanitizeImageUrl = R.ifElse(R.startsWith("http"), R.identity, R.always(""));
+
+export const isTimberFlag = (item: any) => {
+  if (R.hasPath(["product", "timberProductFlag"], item)) {
+    return R.pathOr(false, ["product", "timberProductFlag"])(item) && R.pathOr(0, ["product", "sellOrderMultiple"], item) > 0;
+  } else if (R.has("timberProductFlag", item)) {
+    return R.pathOr(false, ["timberProductFlag"])(item) && getSellOrderMultipleValue(item) > 0;
+  } else {
+    return item?.IsTimberProduct && item?.sellOrderMultiple > 0;
+  }
+};
+/** * @param item product * @return value of the field sellOrderMultiple is present else return 0 for product item */ export const getSellOrderMultipleValue = (
+  item: any,
+) => {
+  return R.pathOr(0, ["sellOrderMultiple"])(item);
 };

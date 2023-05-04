@@ -92,6 +92,12 @@ const colors = {
   lineGrey: "#D9D9D9",
   registerBtnYellow: "#F9D54F",
   darkNewBlueHeader: "#002D5F",
+  pink: "#FCF8FA",
+  purple: "#6F263D",
+  smoothGrey: "#707372",
+  h1: "#131010",
+  promoText: "#DF4C6B",
+  flashBtn: "#1C1C1B",
 };
 
 export default colors;

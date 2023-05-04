@@ -1,7 +1,7 @@
 import React from "react";
 import { Linking, Text } from "react-native";
 import AppConfig from "~root/Config/AppConfig";
-import { Colors, Fonts } from "~root/Themes";
+import { Colors } from "~root/Themes";
 
 export interface IAlertCallbacks {
   onSuccess?: (...args: any) => void;
@@ -10,7 +10,7 @@ export interface IAlertCallbacks {
 // Text constants used in the code
 export const genericErrorMessageWithoutEmail = "Oops! Something went wrong. If problem persists, contact us at ";
 export const OKButton = "OK";
-
+export const netErrMsg = "Oh No! We have lost internet connection while you were in the App, please connect to internet and retry.";
 export enum ERROR_ELEMENTS {
   ERROR_GENERIC_ELEMENT = "ERROR_GENERIC_ELEMENT",
   ERROR_503_ELEMENT = "ERROR_503_ELEMENT",
@@ -32,7 +32,6 @@ export const ERROR_GENERIC_ELEMENT = (
     style={{
       alignSelf: "flex-start",
       marginBottom: 20,
-      fontFamily: Fonts.type.OpenSansRegular,
       fontSize: 14,
       color: Colors.wedgeBlue,
     }}
@@ -50,7 +49,9 @@ export const ERROR_503_ELEMENT = (
     style={{
       alignSelf: "flex-start",
       marginBottom: 20,
-      ...Fonts.style.subtitleLowlight,
+      color: Colors.wedgeBlue,
+      fontSize: 16,
+      // ...Fonts.style.subtitleLowlight,
     }}
   >
     Service unavailable, try again later. If the problem persists, please contact
@@ -59,7 +60,6 @@ export const ERROR_503_ELEMENT = (
     </Text>
   </Text>
 );
-
 
 export const showAlertMessage = (title: string, subTitle: string, dispatchAlert) => {
   dispatchAlert?.({
@@ -74,5 +74,14 @@ export const showAlertMessage = (title: string, subTitle: string, dispatchAlert)
 };
 
 export const BoldText = ({ children }) => {
-  return <Text style={{ fontFamily: Fonts.type.OpenSansBold, fontSize: 12 }}>{children}</Text>;
+  return (
+    <Text
+      style={{
+        // fontFamily: Fonts.type.OpenSansBold,
+        fontSize: 12,
+      }}
+    >
+      {children}
+    </Text>
+  );
 };

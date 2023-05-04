@@ -52,36 +52,36 @@ export const INITIAL_STATE: ImmutableAppState = SI.from({
 
 export const voidAction: Reducer<ImmutableAppState> = R.identity;
 
-export const appError503Visibility: Reducer<ImmutableAppState> = (state, { payload }) =>
+export const appError503Visibility: Reducer<ImmutableAppState> = (state: any, { payload }) =>
   state.merge({
     isVisible: payload,
     modalContent: payload ? ERROR_ELEMENTS.ERROR_503_ELEMENT : undefined,
   });
 
-export const appGenericErrorVisibility: Reducer<ImmutableAppState> = (state, { payload }) =>
+export const appGenericErrorVisibility: Reducer<ImmutableAppState> = (state: any, { payload }) =>
   state.merge({
     isVisible: payload,
     modalContent: payload ? ERROR_ELEMENTS.ERROR_GENERIC_ELEMENT : undefined,
   });
 
-export const appCustomErrorVisibility: Reducer<ImmutableAppState> = (state, { payload }) =>
+export const appCustomErrorVisibility: Reducer<ImmutableAppState> = (state: any, { payload }) =>
   state.merge({
     isVisible: payload.isVisible,
     modalContent: undefined,
   });
 
-export const appForceUpdateVisibility: Reducer<ImmutableAppState> = (state, { payload }) =>
+export const appForceUpdateVisibility: Reducer<ImmutableAppState> = (state: any, { payload }) =>
   state.merge({
     isForceUpdate: payload,
   });
 
-export const setupDeviceToken: Reducer<ImmutableAppState> = (state, { payload }) => state.merge({ deviceToken: payload });
+export const setupDeviceToken: Reducer<ImmutableAppState> = (state: any, { payload }) => state.merge({ deviceToken: payload });
 
-export const setScreensStatus: Reducer<ImmutableAppState> = (state, { payload }) => state.merge({ screensStatus: payload });
+export const setScreensStatus: Reducer<ImmutableAppState> = (state: any, { payload }) => state.merge({ screensStatus: payload });
 
-export const setFeatureToggle: Reducer<ImmutableAppState> = (state, { payload }) => state.merge({ featureToggle: payload });
+export const setFeatureToggle: Reducer<ImmutableAppState> = (state: any, { payload }) => state.merge({ featureToggle: payload });
 
-export const setCurrentTabIndex: Reducer<ImmutableAppState> = (state, { payload }) => state.merge({ currentTabIndex: payload });
+export const setCurrentTabIndex: Reducer<ImmutableAppState> = (state: any, { payload }) => state.merge({ currentTabIndex: payload });
 
 /* ------------- Hookup Reducers To Types ------------- */
 

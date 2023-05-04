@@ -1,16 +1,23 @@
 /// <reference types="@types/webpack-env" />
 import { combineReducers } from "redux";
-import root from "~root/Epics/";
-import Api from "~root/Services/Api";
+import root from "../Epics/";
+import Api from "../Services/Api";
+import AuthReducer, { ImmutableAuthState } from "./AuthReducer";
 import configureStore from "./CreateStore";
-import ProductDetailsReducer, { ImmutableProductDetaiState } from "./ProductDetailsReducers";
+import HomeReducer, { ImmutableHomeScreenState } from "./HomeReducers";
+import ProductReducer, { ImmutableProductState } from "./ProductReducers";
+
 /* ------------- Assemble The Reducers ------------- */
 export const reducers = combineReducers({
-  productDetail: ProductDetailsReducer,
+  auth: AuthReducer,
+  product: ProductReducer,
+  home: HomeReducer,
 });
 
 export interface RootState {
-  productDetail: ImmutableProductDetaiState;
+  auth: ImmutableAuthState;
+  product: ImmutableProductState;
+  home: ImmutableHomeScreenState;
 }
 
 export default async () => {
@@ -19,6 +26,7 @@ export default async () => {
   // tslint:disable-next-line:prefer-const
   const objStore = configureStore(reducers, root, {
     api,
+    db: {},
     store: () => store,
   });
   store = objStore.store;

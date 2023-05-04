@@ -1,5 +1,6 @@
 import { ApiResponse } from "apisauce";
 import { Observable } from "rxjs";
+import { ISearchSolrParams } from "../Types/SearchAPITypes";
 import createHybrisAPI from "./CreateHybrisAPI";
 
 export default {
@@ -13,5 +14,6 @@ export interface Api {
 }
 
 export interface HybrisAPI {
-  getProductDetails: (sku: string, params: any) => Observable<ApiResponse<any>>;
+  solrSearch: (query: ISearchSolrParams, params: any) => Observable<ApiResponse<any>>;
+  getHomeScreen: () => Observable<ApiResponse<any>>;
 }

@@ -1,6 +1,5 @@
 import { TextStyle, ViewStyle } from "react-native";
 import Colors from "./Colors";
-import Fonts from "./Fonts";
 import Metrics from "./Metrics";
 
 // This file is for a reusable grouping of Theme items.
@@ -12,7 +11,7 @@ const ApplicationStyles = {
     elevation: 3,
     zIndex: 1,
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.3,
+    bottomShadowOpacity: 0.5,
     shadowRadius: 7,
   },
   noShadow: {
@@ -62,7 +61,7 @@ const ApplicationStyles = {
       padding: Metrics.baseMargin,
     } as ViewStyle,
     sectionText: {
-      ...Fonts.style.normal,
+      // ...Fonts.style.normal,
       paddingVertical: Metrics.doubleBaseMargin,
       color: Colors.snow,
       marginVertical: Metrics.smallMargin,
@@ -75,7 +74,7 @@ const ApplicationStyles = {
       marginHorizontal: Metrics.smallMargin,
     } as TextStyle,
     titleText: {
-      ...Fonts.style.h2,
+      // ...Fonts.style.h2,
       fontSize: 14,
       color: Colors.text,
     } as TextStyle,
@@ -88,7 +87,7 @@ const ApplicationStyles = {
     marginBottom: Metrics.baseMargin,
   } as ViewStyle,
   darkLabel: {
-    fontFamily: Fonts.type.bold,
+    // fontFamily: Fonts.type.bold,
     color: Colors.snow,
   } as TextStyle,
   groupContainer: {

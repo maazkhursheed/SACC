@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "204130088047",
+    "project_id": "sacc-733ab",
+    "storage_bucket": "sacc-733ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:204130088047:android:7b4b5a94ab78ba7fb8899a",
+        "android_client_info": {
+          "package_name": "com.royalcyber.sacc.sit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "204130088047-54501temmd81070rmeeh36f8dfnsgq9t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqF5uC7gjNwdU2zfdd1q0ZQGsMo-GejsU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "204130088047-54501temmd81070rmeeh36f8dfnsgq9t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

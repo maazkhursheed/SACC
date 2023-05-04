@@ -1,9 +1,13 @@
 // a library to wrap and simplify api calls
-import { ApisauceInstance, create as apicreate } from "apisauce";
+import { create as apicreate } from "apisauce";
+import R from "ramda";
 import { from } from "rxjs";
-import AppConfig from "~root/Config/AppConfig";
 import { HybrisAPI } from "~root/Services/Api";
-const FB_PATH = "/fbcommercewebservices/v2/placemakers";
+import { generateURIfromObject } from "../Lib/CommonHelper";
+import { IAuthTokenRequestParam } from "../Types/AuthAPITypes";
+import { ISearchSolrParams } from "../Types/SearchAPITypes";
+
+const FB_PATH = "occ/v2/skysales-sa";
 
 // our "constructor"
 export default (): HybrisAPI => {
@@ -14,20 +18,13 @@ export default (): HybrisAPI => {
   // Create and configure an apisauce-based api object.
   //
 
-  let api: ApisauceInstance | undefined = undefined;
-  const getApi = () => {
-    if (api) {
-      return api;
-    }
-    api = apicreate({
-      baseURL: AppConfig.CCV2_ENDPOINT,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      timeout: 20000,
-    });
-    return api;
-  };
+  const api = apicreate({
+    baseURL: "https://api.c1ydyig1w-saudiairl1-d1-public.model-t.cc.commerce.ondemand.com/",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    timeout: 20000,
+  });
   // ------
   // STEP 2
   // ------
@@ -43,8 +40,23 @@ export default (): HybrisAPI => {
   // way at this level.
   //
 
-  const getProductDetails = (sku, param) => from(getApi().get(FB_PATH + "/products/" + sku, param));
-
+  const solrSearch = (query: ISearchSolrParams, params: any) => {
+    return from(
+      api.get(
+        FB_PATH +
+          "/products/search?" +
+          generateURIfromObject({
+            query: R.compose(R.ifElse(R.isNil, R.identity, R.compose(encodeURIComponent, R.replace(/[+]/g, " "), decodeURIComponent, R.prop("query"))))(query),
+            currentPage: query && query.currentPage,
+            fields: "FULL",
+          }),
+        params,
+      ),
+    );
+  };
+  const getHomeScreen = () => {
+    return from(api.get(FB_PATH + "/cms/pages/mobileLandingPage?fields=FULL"));
+  };
   // ------
   // STEP 3
   // ------
@@ -57,8 +69,24 @@ export default (): HybrisAPI => {
   // because it is scoped privately.  This is one way to create truly
   // private scoped goodies in JavaScript.
   //
+  const authorization = (bodyParams: IAuthTokenRequestParam) => {
+    return from(
+      api.post(
+        `https://api.c1ydyig1w-saudiairl1-d1-public.model-t.cc.commerce.ondemand.com/authorizationserver/oauth/token?client_id=${bodyParams.client_id}&client_secret=${bodyParams.client_secret}&grant_type=${bodyParams.grant_type}&username=${bodyParams.username}&password=${bodyParams.password}`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      ),
+    );
+  };
+
   return {
     // a list of the API functions from step 2
-    getProductDetails,
+    solrSearch,
+    authorization,
+    getHomeScreen,
   };
 };

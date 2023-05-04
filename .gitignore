@@ -43,10 +43,10 @@ buck-out
 
 # Android
 .idea
+*.hprof
 .gradle
 local.properties
 *.iml
-*.hprof
 #/android/
 
 # Node
@@ -73,19 +73,25 @@ package-lock.json
 /ReactCommon/**/*.xcodeproj
 RNTester/build
 
-# Ruby / CocoaPods
+# CocoaPods
 /template/ios/Pods/
 /template/ios/Podfile.lock
-/vendor/bundle/
+
 yarn.lock
+/.scannerwork
 
 
 .jest
 *.tsx.snap
 
 .java-version
+/default.realm
+/default.realm.lock
+/default.realm.management/access_control.control.mx
+/default.realm.management/access_control.write.mx
 .env
 *.lock
+sonar-project.properties
 !/ios/Gemfile.lock
 !/android/Gemfile.lock
 
@@ -96,6 +102,3 @@ fastlane/.env.*
 
 fastlane/README.md
 fastlane/report.xml
-
-.vscode/
-.history/

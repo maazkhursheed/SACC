@@ -20,8 +20,42 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.204130088047-qpv0atump9cfa6s0ounnl2cra6siiuqf</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb911551933604389</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array/>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FacebookAppID</key>
+	<string>911551933604389</string>
+	<key>FacebookDisplayName</key>
+	<string>SACC</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -35,8 +69,84 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string> You should fill this in</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>You should fill this in</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Access camera</string>
+	<key>NSContactsUsageDescription</key>
+	<string>You should fill this in</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Example: You should fill this in</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string> You should fill this in</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string> You should fill this in</string>
+	<key>NSHomeKitUsageDescription</key>
+	<string> You should fill this in</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Program requires GPS to track cars and job orders</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string> You should fill this in</string>
+	<key>NSLocationUsageDescription</key>
+	<string> You should fill this in</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string> You should fill this in</string>
+	<key>NSMotionUsageDescription</key>
+	<string> You should fill this in</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string> You should fill this in</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>NSPhotoLibraryUsageDescription</string>
+	<key>NSRemindersUsageDescription</key>
+	<string> You should fill this in</string>
+	<key>NSSiriUsageDescription</key>
+	<string> You should fill this in</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string> You should fill this in</string>
+	<key>NSVideoSubscriberAccountUsageDescription</key>
+	<string> You should fill this in</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>AntDesign.ttf</string>
+		<string>Entypo.ttf</string>
+		<string>EvilIcons.ttf</string>
+		<string>Feather.ttf</string>
+		<string>FontAwesome.ttf</string>
+		<string>FontAwesome5_Brands.ttf</string>
+		<string>FontAwesome5_Regular.ttf</string>
+		<string>FontAwesome5_Solid.ttf</string>
+		<string>Foundation.ttf</string>
+		<string>Ionicons.ttf</string>
+		<string>MaterialCommunityIcons.ttf</string>
+		<string>MaterialIcons.ttf</string>
+		<string>Octicons.ttf</string>
+		<string>Roboto_medium.ttf</string>
+		<string>Roboto.ttf</string>
+		<string>rubicon-icon-font.ttf</string>
+		<string>SimpleLineIcons.ttf</string>
+		<string>Zocial.ttf</string>
+		<string>fb-assets.ttf</string>
+		<string>Fontisto.ttf</string>
+		<string>SFProDisplay-Bold.ttf</string>
+		<string>SFProDisplay-Regular.ttf</string>
+		<string>fb-icons.ttf</string>
+		<string>OpenSans-Bold.ttf</string>
+		<string>OpenSans-BoldItalic.ttf</string>
+		<string>OpenSans-ExtraBold.ttf</string>
+		<string>OpenSans-ExtraBoldItalic.ttf</string>
+		<string>OpenSans-Italic.ttf</string>
+		<string>OpenSans-Light.ttf</string>
+		<string>OpenSans-LightItalic.ttf</string>
+		<string>OpenSans-Regular.ttf</string>
+		<string>OpenSans-Semibold.ttf</string>
+		<string>OpenSans-SemiboldItalic.ttf</string>
+		<string>OpenSans-BoldItalic.ttf</string>
+		<string>proximanova-bold.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

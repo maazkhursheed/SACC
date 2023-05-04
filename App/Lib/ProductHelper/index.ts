@@ -1,7 +1,7 @@
 import * as R from "ramda";
 import * as RA from "ramda-adjunct";
 import { Platform } from "react-native";
-import { convertToString } from "~root/Lib/StringHelper";
+// import { convertToString } from "~root/Lib/StringHelper";
 import { renameStockKeys, sanitizeImageUrl } from "../DataHelper";
 
 /**
@@ -101,15 +101,15 @@ R.curry((item, cart) =>
 /**
  * This helper function returns number for fraction points of timber product quantity
  */
-export const getFractionUOM = (data: any) =>
-  R.compose(Number, R.ifElse(R.compose(R.equals(1), R.length), R.always("0"), R.last), R.split("."), convertToString)(data);
+// export const getFractionUOM = (data: any) =>
+//   R.compose(Number, R.ifElse(R.compose(R.equals(1), R.length), R.always("0"), R.last), R.split("."), convertToString)(data);
 
-export const getDigitsUOM = (data: any) => R.compose(Number, R.head, R.split("."), convertToString)(data);
+// export const getDigitsUOM = (data: any) => R.compose(Number, R.head, R.split("."), convertToString)(data);
 
-export const getDigitsNumberLength = value => R.compose(R.length, R.head, R.split("."), convertToString)(value);
+// export const getDigitsNumberLength = value => R.compose(R.length, R.head, R.split("."), convertToString)(value);
 
-export const getFractionNumberLength = value =>
-  R.compose(R.ifElse(R.equals(-1), R.always(0), R.subtract(value.toString().length - 1)), R.indexOf("."), convertToString)(value);
+// export const getFractionNumberLength = value =>
+//   R.compose(R.ifElse(R.equals(-1), R.always(0), R.subtract(value.toString().length - 1)), R.indexOf("."), convertToString)(value);
 
 export const getSearchParameters = (value: any) =>
   R.compose(

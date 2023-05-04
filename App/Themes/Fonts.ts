@@ -1,4 +1,4 @@
-import colors from "~root/Themes/Colors";
+import colors from "./Colors";
 
 const type = {
   base: "Avenir-Book",
@@ -105,16 +105,15 @@ const style = {
     color: colors.darkBlueHeader,
     fontSize: 14,
   },
-  optionItems: {
-    fontFamily: type.OpenSansBold,
-    color: colors.wedgeBlue,
-    fontSize: 16,
-  },
-
   body: {
     fontFamily: type.OpenSansRegular,
     color: colors.darkerGrey,
     fontSize: 12,
+  },
+  optionItems: {
+    fontFamily: type.OpenSansBold,
+    color: colors.wedgeBlue,
+    fontSize: 16,
   },
   bodyHighlight: {
     fontFamily: type.OpenSansBold,
@@ -141,12 +140,6 @@ const style = {
     color: colors.lightBlue,
     fontSize: 14,
   },
-
-  caption: {
-    fontFamily: type.OpenSansRegular,
-    color: colors.darkerGrey,
-    fontSize: 10,
-  },
   captionHighlight: {
     fontFamily: type.OpenSansBold,
     color: colors.darkGrey,
@@ -157,11 +150,6 @@ const style = {
     color: colors.wedgeBlue,
     fontSize: 10,
   },
-  smallCaption: {
-    fontFamily: type.OpenSansRegular,
-    color: colors.darkerGrey,
-    fontSize: 8,
-  },
   smallCaptionHighlight: {
     fontFamily: type.OpenSansBold,
     color: colors.darkGrey,
@@ -171,19 +159,6 @@ const style = {
     fontFamily: type.OpenSansBold,
     color: colors.wedgeBlue,
     fontSize: 8,
-  },
-  btnSmall: {
-    fontFamily: type.ProximaBold,
-    color: colors.textInverse,
-    alignSelf: "center",
-    fontSize: 11,
-  },
-  btnLarge: {
-    fontFamily: type.ProximaBold,
-    textAlign: "center",
-    color: colors.snow,
-    fontSize: 16,
-    padding: 14,
   },
   smallRedCaptionHighlight: {
     fontFamily: type.OpenSansBold,
@@ -202,6 +177,36 @@ const style = {
     color: colors.brandPrimary,
     fontSize: 21,
     fontWeight: "bold",
+  },
+  estimatedFont: {
+    fontFamily: type.OpenSansBold,
+    color: colors.darkBlueHeader,
+    fontSize: 12,
+  },
+
+  caption: {
+    fontFamily: type.OpenSansRegular,
+    color: colors.darkerGrey,
+    fontSize: 10,
+  },
+
+  smallCaption: {
+    fontFamily: type.OpenSansRegular,
+    color: colors.darkerGrey,
+    fontSize: 8,
+  },
+  btnSmall: {
+    fontFamily: type.ProximaBold,
+    color: colors.textInverse,
+    alignSelf: "center",
+    fontSize: 11,
+  },
+  btnLarge: {
+    fontFamily: type.ProximaBold,
+    textAlign: "center",
+    color: colors.snow,
+    fontSize: 16,
+    padding: 14,
   },
   updateMessage: {
     fontFamily: type.OpenSansRegular,
@@ -236,29 +241,9 @@ const style = {
     fontFamily: type.SFProRegular,
     fontSize: 18,
   },
-  openSans12: {
-    fontFamily: type.OpenSansRegular,
-    fontSize: 12,
-    color: colors.black,
-  },
-  openSans34Bold: {
-    fontFamily: type.OpenSansBold,
-    fontSize: 34,
-    color: colors.black,
-  },
-  openSans10Bold: {
-    fontFamily: type.OpenSansBold,
-    fontSize: 10,
-    color: colors.black,
-  },
   openSans11Regualr: {
     fontFamily: type.OpenSansRegular,
     fontSize: 11,
-    color: colors.black,
-  },
-  openSans12Bold: {
-    fontFamily: type.OpenSansBold,
-    fontSize: 12,
     color: colors.black,
   },
   openSansExtraBold12: {
@@ -271,58 +256,8 @@ const style = {
     fontSize: 28,
     color: colors.black,
   },
-  openSans14: {
-    fontFamily: type.OpenSansRegular,
-    fontSize: 14,
-    color: colors.black,
-  },
-  openSans16: {
-    fontFamily: type.OpenSansRegular,
-    fontSize: 16,
-    color: colors.black,
-  },
-  openSans18Regular: {
-    fontFamily: type.OpenSansRegular,
-    fontSize: 18,
-    color: colors.black,
-  },
-  openSans16Regular: {
-    fontFamily: type.OpenSansRegular,
-    fontSize: 16,
-    color: colors.black,
-  },
-  openSans20Regular: {
-    fontFamily: type.OpenSansRegular,
-    fontSize: 20,
-    color: colors.black,
-  },
-  openSans18Bold: {
-    fontFamily: type.OpenSansBold,
-    fontSize: 18,
-    color: colors.black,
-  },
-  openSans16Bold: {
-    fontFamily: type.OpenSansBold,
-    fontSize: 16,
-    color: colors.black,
-  },
-  openSans14Bold: {
-    fontFamily: type.OpenSansBold,
-    fontSize: 14,
-    color: colors.black,
-  },
-  openSans24Bold: {
-    fontFamily: type.OpenSansBold,
-    fontSize: 24,
-    color: colors.black,
-  },
   openSans28Bold: {
     fontFamily: type.OpenSansExtraBold,
-    fontSize: 28,
-    color: colors.black,
-  },
-  openSans28PlainBold: {
-    fontFamily: type.OpenSansBold,
     fontSize: 28,
     color: colors.black,
   },
@@ -330,11 +265,6 @@ const style = {
     fontFamily: type.OpenSansRegular,
     fontSize: 12,
     color: colors.darkGrey,
-  },
-  estimatedFont: {
-    fontFamily: type.OpenSansBold,
-    color: colors.darkBlueHeader,
-    fontSize: 12,
   },
   labelLogo: {
     fontFamily: type.OpenSansRegular,
@@ -345,6 +275,196 @@ const style = {
     fontFamily: type.OpenSansExtraBold,
     fontSize: 20,
     color: colors.darkBlueHeader,
+  },
+  openSans10Regular: {
+    fontFamily: type.OpenSansRegular,
+    fontSize: 10,
+    color: colors.black,
+  },
+  openSans10SemiBoldWhite: {
+    fontFamily: type.OpenSansSemiBold,
+    fontSize: 10,
+    color: colors.white,
+  },
+  openSans12Regular: {
+    fontFamily: type.OpenSansRegular,
+    fontSize: 12,
+    color: colors.black,
+  },
+  openSans12RegularGrey: {
+    fontFamily: type.OpenSansRegular,
+    fontSize: 12,
+    color: colors.smoothGrey,
+  },
+  openSans14RegularGrey: {
+    fontFamily: type.OpenSansRegular,
+    fontSize: 14,
+    color: colors.smoothGrey,
+  },
+  openSans14RegularInput: {
+    fontFamily: type.OpenSansRegular,
+    fontSize: 14,
+    color: colors.subHeadingColor,
+  },
+  openSans14Regular: {
+    fontFamily: type.OpenSansRegular,
+    fontSize: 14,
+    color: colors.black,
+  },
+  openSans14RegularWhite: {
+    fontFamily: type.OpenSansRegular,
+    fontSize: 14,
+    color: colors.white,
+  },
+  openSans14SemiBold: {
+    fontFamily: type.OpenSansSemiBold,
+    fontSize: 14,
+    color: colors.black,
+  },
+  openSans14SemiBoldPrice: {
+    fontFamily: type.OpenSansSemiBold,
+    fontSize: 14,
+    color: colors.purple,
+  },
+  openSans16Regular: {
+    fontFamily: type.OpenSansRegular,
+    fontSize: 16,
+    color: colors.black,
+  },
+  openSans18Regular: {
+    fontFamily: type.OpenSansRegular,
+    fontSize: 18,
+    color: colors.black,
+  },
+  openSans20Regular: {
+    fontFamily: type.OpenSansRegular,
+    fontSize: 20,
+    color: colors.black,
+  },
+  openSans20RegularH1: {
+    fontFamily: type.OpenSansRegular,
+    fontSize: 20,
+    color: colors.h1,
+  },
+  openSans22Regular: {
+    fontFamily: type.OpenSansRegular,
+    fontSize: 22,
+    color: colors.black,
+  },
+  openSans24Regular: {
+    fontFamily: type.OpenSansRegular,
+    fontSize: 24,
+    color: colors.black,
+  },
+  openSans24RegularPromo: {
+    fontFamily: type.OpenSansRegular,
+    fontSize: 24,
+    color: colors.promoText,
+  },
+  openSans12SemiBold: {
+    fontFamily: type.OpenSansSemiBold,
+    fontSize: 12,
+    color: colors.black,
+  },
+  openSans16SemiBold: {
+    fontFamily: type.OpenSansSemiBold,
+    fontSize: 16,
+    color: colors.h1,
+  },
+  openSans14SemiBoldH1: {
+    fontFamily: type.OpenSansSemiBold,
+    fontSize: 14,
+    color: colors.h1,
+  },
+  openSans14SemiBoldGrey: {
+    fontFamily: type.OpenSansSemiBold,
+    fontSize: 14,
+    color: colors.smoothGrey,
+  },
+  openSans10Bold: {
+    fontFamily: type.OpenSansBold,
+    fontSize: 10,
+    color: colors.black,
+  },
+  openSans12Bold: {
+    fontFamily: type.OpenSansBold,
+    fontSize: 12,
+    color: colors.black,
+  },
+  openSans14Bold: {
+    fontFamily: type.OpenSansBold,
+    fontSize: 14,
+    color: colors.black,
+  },
+  openSans15Bold: {
+    fontFamily: type.OpenSansBold,
+    fontSize: 15,
+    color: colors.black,
+  },
+  openSans14BoldWhite: {
+    fontFamily: type.OpenSansBold,
+    fontSize: 14,
+    color: colors.white,
+  },
+  openSans16Bold: {
+    fontFamily: type.OpenSansBold,
+    fontSize: 16,
+    color: colors.black,
+  },
+  openSans16BoldFlash: {
+    fontFamily: type.OpenSansBold,
+    fontSize: 16,
+    color: colors.flashBtn,
+  },
+  openSans16BoldWhite: {
+    fontFamily: type.OpenSansBold,
+    fontSize: 16,
+    color: colors.white,
+  },
+  openSans18Bold: {
+    fontFamily: type.OpenSansBold,
+    fontSize: 18,
+    color: colors.black,
+  },
+  openSans20Bold: {
+    fontFamily: type.OpenSansBold,
+    fontSize: 20,
+    color: colors.h1,
+  },
+  openSans20BoldWhite: {
+    fontFamily: type.OpenSansBold,
+    fontSize: 20,
+    color: colors.white,
+  },
+  openSans14BoldDarkerGrey: {
+    fontFamily: type.OpenSansBold,
+    fontSize: 14,
+    color: colors.darkerGrey,
+  },
+  openSans22Bold: {
+    fontFamily: type.OpenSansBold,
+    fontSize: 22,
+    color: colors.black,
+  },
+  openSans24Bold: {
+    fontFamily: type.OpenSansBold,
+    fontSize: 24,
+    color: colors.black,
+  },
+  openSans28PlainBold: {
+    fontFamily: type.OpenSansBold,
+    fontSize: 28,
+    color: colors.black,
+  },
+  openSans30Bold: {
+    fontFamily: type.OpenSansBold,
+    fontSize: 30,
+    color: colors.h1,
+  },
+  openSans34Bold: {
+    fontFamily: type.OpenSansBold,
+    fontSize: 34,
+    color: colors.black,
   },
 };
 

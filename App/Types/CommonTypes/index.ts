@@ -9,3 +9,9 @@ export enum RequestedTime {
   PM = "PM",
   SPECIFIC_TIME = "Specific Time",
 }
+
+export enum Token {
+  AccessTokenKey = "ACCESS_TOKEN_KEY",
+  RefreshTokenKey = "REFRESH_TOKEN_KEY",
+  PasswordTokenKey = "PASSWORD_TOKEN_KEY",
+}

@@ -1,0 +1,105 @@
+import { StyleSheet } from "react-native";
+import { Colors } from "~root/Themes";
+
+export default StyleSheet.create({
+  container: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: Colors.transparent,
+    position: "absolute",
+    alignItems: "center",
+    justifyContent: "center",
+    alignContent: "center",
+  },
+  semiTransparentView: {
+    flex: 1,
+    backgroundColor: Colors.black,
+    opacity: 0.5,
+  },
+  headingWrapper: { flexDirection: "row", justifyContent: "space-between" },
+  contentView: {
+    marginHorizontal: 20,
+    paddingTop: 50,
+    paddingBottom: 40,
+    paddingHorizontal: 20,
+    backgroundColor: Colors.white,
+    shadowColor: "#00000029",
+    shadowOffset: {
+      width: 15,
+      height: 15,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 10,
+    elevation: 20,
+  },
+  heading: {
+    // ...Fonts.style.openSans16Bold,
+    fontWeight: "bold",
+    fontSize: 16,
+    textAlign: "center",
+  },
+  subHeading: {
+    // ...Fonts.style.openSans16Regular,
+    fontSize: 16,
+    color: Colors.black,
+    textAlign: "center",
+  },
+  warningMessage: {
+    // ...Fonts.style.openSans14Regular,
+    textAlign: "left",
+    marginTop: 20,
+    lineHeight: 24,
+    fontSize: 14,
+    color: Colors.black,
+    textDecorationLine: "underline",
+  },
+  warningMessageBlack: {
+    // ...Fonts.style.openSans14Bold,
+    color: Colors.black,
+    fontSize: 14,
+    fontWeight: "600",
+  },
+  button1: {
+    // ...Fonts.style.openSans16Bold,
+    textAlign: "center",
+    fontSize: 16,
+    color: Colors.red,
+  },
+  button2: {
+    // ...Fonts.style.openSans16Regular,
+    fontSize: 16,
+    color: Colors.black,
+    textAlign: "center",
+  },
+  button1Container: {
+    borderTopWidth: 1,
+    borderColor: Colors.borderGrey,
+    marginHorizontal: -20,
+    paddingVertical: 15,
+  },
+  button2Container: {
+    borderTopWidth: 1,
+    borderColor: Colors.borderGrey,
+    marginHorizontal: -20,
+    paddingTop: 15,
+  },
+  inputLabelStyle: {
+    // fontFamily: Fonts.type.OpenSansRegular,
+    fontSize: 15,
+    color: Colors.black,
+    marginBottom: 5,
+  },
+  inputTextStyle: {
+    // fontFamily: Fonts.type.OpenSansRegular,
+    fontSize: 15,
+    textAlign: "left",
+    marginLeft: 15,
+  },
+  inputwrapperStyle: {
+    backgroundColor: Colors.white,
+    borderWidth: 1,
+    borderColor: Colors.grey,
+    borderRadius: 7,
+  },
+  bottomBtnContaiber: { marginTop: 30, backgroundColor: Colors.black, borderRadius: 7 },
+});

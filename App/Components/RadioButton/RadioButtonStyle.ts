@@ -50,15 +50,16 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   refineSelectedButton: {
-    width: 15,
-    height: 15,
+    width: 20,
+    height: 20,
     borderRadius: 2,
+    borderWidth: 1,
+    borderColor: colors.shadow,
     backgroundColor: colors.purple,
   },
   refineRadioText: {
     ...Fonts.style.openSans14Regular,
     color: colors.h1,
     marginLeft: 18,
-    flexDirection: "row",
   },
 });

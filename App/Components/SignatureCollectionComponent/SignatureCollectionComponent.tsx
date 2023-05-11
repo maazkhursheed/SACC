@@ -1,8 +1,7 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { FlatList, Text, View, ViewProps } from "react-native";
+import { FlatList, View, ViewProps } from "react-native";
 import HeaderTitle from "../BestSellerHeader/BestSellerHeader";
-import Divider from "../DividerWithCircle";
 import styles from "./SignatureCollectionComponentStyle";
 import SignatureCollectionItemComponent from "./SignatureCollectionItemComponent";
 
@@ -20,20 +19,22 @@ const SignatureCollectionComponent: React.FunctionComponent<Props> = ({ data, he
     <FlatList
       data={data}
       contentContainerStyle={[styles.contentContainerStyle, containerStyle]}
-      ListHeaderComponent={<HeaderTitle title={headingTitle} count={data?.length ?? 0} />}
+      ListHeaderComponent={() => {
+        return <View>{data?.length > 0 && <HeaderTitle title={headingTitle} count={data?.length ?? 0} />}</View>;
+      }}
       renderItem={({ item }) => {
         return <SignatureCollectionItemComponent item={item} direction={direction} />;
       }}
       keyExtractor={(item, index) => index.toString()}
-      ListFooterComponent={data?.length > 0 && <Divider />}
-      ListEmptyComponent={() => {
-        return (
-          <View>
-            <Text>{t("noSignatureProducts")}</Text>
-            <Divider />
-          </View>
-        );
-      }}
+      // ListFooterComponent={data?.length > 0 && <Divider />}
+      // ListEmptyComponent={() => {
+      //   return (
+      //     <View>
+      //       <Text>{t("noSignatureProducts")}</Text>
+      //       <Divider />
+      //     </View>
+      //   );
+      // }}
     />
   );
 };

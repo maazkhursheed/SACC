@@ -33,7 +33,7 @@ const ShopByCategory: React.SFC<Props> = ({}: Props) => {
         count={0}
         onPress={() => viewAllCategory()}
         rightText={t("home.ViewAll")}
-        containerStyle={{ marginHorizontal: 16, marginTop: 20 }}
+        containerStyle={styles.containerStyle}
       />
       <FlatList
         contentContainerStyle={styles.listContainerStyle}

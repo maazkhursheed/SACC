@@ -81,6 +81,8 @@
     "addressBook": "دليل العناوين",
     "updateEmailAddress": "تحديث البريد الألكتروني",
     "myAccount": "حسابي",
-    "settings": "إعدادات"
+    "settings": "إعدادات",
+    "searchHeader": "لقد بحثت عن",
+    "CategoriesHeader": "فئات"
   }
 }

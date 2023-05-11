@@ -8,6 +8,7 @@ export interface IItemListRequestParam extends IListRequestParam {
 }
 
 export interface ISearchSolrParams {
+  sort: string;
   query: string;
   currentPage?: string;
 }

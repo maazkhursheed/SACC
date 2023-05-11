@@ -63,4 +63,7 @@ export default StyleSheet.create({
   inactiveDotStyle: {
     backgroundColor: "black",
   },
+  nextPrevWrapper: { paddingHorizontal: 16, justifyContent: "space-between", position: "absolute", right: 0, left: 0 },
+  innerNextPrevWrapper: { flex: 1, flexDirection: "row" },
+  nextBtncontainer: { padding: 15, alignSelf: "flex-start", backgroundColor: "#fff" },
 });

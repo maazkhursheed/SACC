@@ -20,7 +20,11 @@ import styles from "./ProfileScreenStyles";
 const ProfileScreen = () => {
   const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
-  const [webview, setWebView] = useState(false);
+  const [orderWebview, setOrderWebView] = useState(false);
+  const [profileWebview, setProfileWebView] = useState(false);
+  const [updatePassWebview, setUpdatePassWebView] = useState(false);
+  const [updateEmailWebview, setUpdateEmailWebView] = useState(false);
+  const [addressWebview, setAddressWebView] = useState(false);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [pass, getPass] = useState();
@@ -51,12 +55,17 @@ const ProfileScreen = () => {
         <NavListItemButton onPress={() => {}} btnText={t("myWishList")} />
         <NavListItemButton
           onPress={() => {
-            setWebView(true);
+            setOrderWebView(true);
           }}
           btnText={t("orderHistory")}
         />
         <NavListItemButton onPress={() => {}} btnText={t("supportTickets")} />
-        <NavListItemButton onPress={() => {}} btnText={t("personalDetails")} />
+        <NavListItemButton
+          onPress={() => {
+            setProfileWebView(true);
+          }}
+          btnText={t("personalDetails")}
+        />
       </View>
     );
   };
@@ -64,9 +73,24 @@ const ProfileScreen = () => {
     return (
       <View>
         <LinksHeading heading={t("settings")} />
-        <NavListItemButton onPress={() => {}} btnText={t("changePassword")} />
-        <NavListItemButton onPress={() => {}} btnText={t("updateEmailAddress")} />
-        <NavListItemButton onPress={() => {}} btnText={t("addressBook")} />
+        <NavListItemButton
+          onPress={() => {
+            setUpdatePassWebView(true);
+          }}
+          btnText={t("changePassword")}
+        />
+        <NavListItemButton
+          onPress={() => {
+            setUpdateEmailWebView(true);
+          }}
+          btnText={t("updateEmailAddress")}
+        />
+        <NavListItemButton
+          onPress={() => {
+            setAddressWebView(true);
+          }}
+          btnText={t("addressBook")}
+        />
         <NavListItemButton onPress={() => navigation.navigate("DeleteAccountContainer")} btnText={t("deleteAccount")} />
       </View>
     );
@@ -119,17 +143,73 @@ const ProfileScreen = () => {
           ]);
         }}
       />
-      {webview && (
+      {orderWebview && (
         <CustomWebView
           source={{
-            uri: Config.WEB_VIEW_URL,
+            uri: Config.WEB_VIEW_URL + "orders?source=Mobile",
             headers: {
               Authorization: "Basic " + encodingBase64(pass?.username, pass?.password),
             },
           }}
-          visible={webview}
+          visible={orderWebview}
           onStatechanges={() => {}}
-          closeSheet={() => setWebView(false)}
+          closeSheet={() => setOrderWebView(false)}
+          isHeader={true}
+        />
+      )}
+      {profileWebview && (
+        <CustomWebView
+          source={{
+            uri: Config.WEB_VIEW_URL + "update-profile?source=Mobile",
+            headers: {
+              Authorization: "Basic " + encodingBase64(pass?.username, pass?.password),
+            },
+          }}
+          visible={profileWebview}
+          onStatechanges={() => {}}
+          closeSheet={() => setProfileWebView(false)}
+          isHeader={true}
+        />
+      )}
+      {updatePassWebview && (
+        <CustomWebView
+          source={{
+            uri: Config.WEB_VIEW_URL + "update-password?source=Mobile",
+            headers: {
+              Authorization: "Basic " + encodingBase64(pass?.username, pass?.password),
+            },
+          }}
+          visible={updatePassWebview}
+          onStatechanges={() => {}}
+          closeSheet={() => setUpdatePassWebView(false)}
+          isHeader={true}
+        />
+      )}
+      {updateEmailWebview && (
+        <CustomWebView
+          source={{
+            uri: Config.WEB_VIEW_URL + "update-email?source=Mobile",
+            headers: {
+              Authorization: "Basic " + encodingBase64(pass?.username, pass?.password),
+            },
+          }}
+          visible={updateEmailWebview}
+          onStatechanges={() => {}}
+          closeSheet={() => setUpdateEmailWebView(false)}
+          isHeader={true}
+        />
+      )}
+      {addressWebview && (
+        <CustomWebView
+          source={{
+            uri: Config.WEB_VIEW_URL + "address-book?source=Mobile",
+            headers: {
+              Authorization: "Basic " + encodingBase64(pass?.username, pass?.password),
+            },
+          }}
+          visible={addressWebview}
+          onStatechanges={() => {}}
+          closeSheet={() => setAddressWebView(false)}
           isHeader={true}
         />
       )}

@@ -82,6 +82,8 @@
     "addressBook": "Address Book",
     "updateEmailAddress": "Update Email Address",
     "myAccount": "My Account",
-    "settings": "Settings"
+    "settings": "Settings",
+    "searchHeader": "You searched for",
+    "CategoriesHeader": "Categories"
   }
 }

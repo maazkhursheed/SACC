@@ -8,11 +8,14 @@ import SortByItemComponent from "../SortFilterComponent/SortByItemComponent";
 interface OwnProps {
   item: any;
   onBackPress?: () => void;
+  onSortingSelection: (code: string) => void;
+  selectedSortCode: string;
+  sortRef: any;
 }
 
 type Props = OwnProps;
 
-const SortByComponent: React.FunctionComponent<Props> = ({ item, onBackPress }: Props) => {
+const SortByComponent: React.FunctionComponent<Props> = ({ item, onBackPress, onSortingSelection, selectedSortCode, sortRef }: Props) => {
   const { t } = useTranslation();
   return (
     <>
@@ -24,7 +27,7 @@ const SortByComponent: React.FunctionComponent<Props> = ({ item, onBackPress }: 
           <Multiply style={styles.crossIcon} />
         </TouchableOpacity>
       </View>
-      <SortByItemComponent sorts={item} />
+      <SortByItemComponent sortRef={sortRef} selectedSortCode={selectedSortCode} onSortingSelection={onSortingSelection} sorts={item} />
     </>
   );
 };

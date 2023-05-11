@@ -83,13 +83,14 @@ export default StyleSheet.create({
     height: 50,
     backgroundColor: "white",
     marginBottom: 10,
+    position: "absolute",
+    bottom: 50,
   },
   scrollContainer: {
     flex: 1,
     backgroundColor: "white",
   },
   containerSlider: {
-    flex: 1,
     paddingHorizontal: 20,
     alignItems: "stretch",
     justifyContent: "center",
@@ -130,7 +131,7 @@ export default StyleSheet.create({
     height: THUMB_RADIUS * 1.5,
     borderRadius: THUMB_RADIUS,
     borderColor: "#6E263D",
-    borderWidth: 2,
+    borderWidth: 1,
     shadowColor: "#000000",
     shadowOffset: { width: 0, height: -1 },
     shadowOpacity: 0.16,
@@ -168,7 +169,7 @@ export default StyleSheet.create({
     backgroundColor: "#6E263D",
     borderRadius: 4,
   },
-  text: {
+  labelText: {
     fontSize: 16,
     color: "#fff",
   },

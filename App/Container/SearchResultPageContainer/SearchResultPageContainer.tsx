@@ -1,4 +1,4 @@
-import { useIsFocused } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import * as R from "ramda";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -10,30 +10,30 @@ import BestSellersCartItemComponent from "../../Components/BestSellersCartCompon
 import FilterComponent from "../../Components/FilterComponent/FilterComponent";
 import FullHeader from "../../Components/FullHeader/FullHeader";
 import LoadingView from "../../Components/LoadingView/LoadingView";
-import SmallHeader from "../../Components/SmallHeader";
+import SearchHeader from "../../Components/SearchHeader";
 import { RootState } from "../../Reducers";
 import { ProductActions } from "../../Reducers/ProductReducers";
-import styles from "./ProductListingContainerStyle";
+import styles from "./SearchResultPageContainerStyle";
 
 interface StateProps {
   data?: any;
   loading?: boolean;
   searchPageCount: number;
-  navigation: any;
   route: any;
 }
 
 type Props = StateProps;
 
-const ProductListingContainer: React.SFC<Props> = ({ route, navigation }: Props) => {
+const SearchResultPageContainer: React.SFC<Props> = ({ route }: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+
   let onEndReachedCalledDuringMomentum = true;
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedSortCode, setSelectedSortCode] = useState("");
-  const [categoryId, setCategoryId] = useState("");
-  const isFocused = useIsFocused();
-  const { products, searchPageCount, totalResults, loading, facets } = useSelector((state: RootState) => ({
+  const { products, searchPageCount, totalResults, loading, facets, data } = useSelector((state: RootState) => ({
+    data: state.product,
     products: state.product?.dataSearch ? state.product?.dataSearch?.products : state.product?.data ? state.product?.data?.products : [],
     searchPageCount: state.product?.dataSearch ? R.pathOr(0, ["product", "dataSearch", "pages"], state) : R.pathOr(0, ["product", "data", "pages"], state),
     totalResults: state.product?.dataSearch
@@ -42,24 +42,8 @@ const ProductListingContainer: React.SFC<Props> = ({ route, navigation }: Props)
     loading: state.product?.fetching,
     facets: state.product.facets ?? [],
   }));
-  const item = route?.params?.item;
-
-  const params = route?.params;
-
-  useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", () => {
-      setCategoryId(params?.categoryId ?? "");
-      callRootApi();
-    });
-    return unsubscribe;
-  }, [navigation, isFocused]);
-
-  useEffect(() => {
-    callRootApi();
-  }, [selectedSortCode]);
-
   const callRootApi = () => {
-    const data = params?.categoryId;
+    const data = route.params?.searchText;
     apiCall({ query: data, currentPage: "0", sort: selectedSortCode }, 1);
   };
 
@@ -67,21 +51,19 @@ const ProductListingContainer: React.SFC<Props> = ({ route, navigation }: Props)
     dispatch(ProductActions.requestSearchSolr(param, callback));
   };
 
+  useEffect(() => {
+    callRootApi();
+  }, [selectedSortCode]);
+
   const handleMoreData = () => {
     if (currentPage < searchPageCount - 1) {
       let queryStr = "";
-      if (categoryId?.length > 0) {
-        queryStr = categoryId;
+      if (route.params?.searchText?.length > 0) {
+        queryStr = route.params?.searchText;
       }
       apiCall({ query: queryStr, currentPage: (currentPage + 1).toString() }, 1);
       setCurrentPage(currentPage + 1);
     }
-  };
-
-  const onBackPress = () => {
-    setSelectedSortCode("");
-    dispatch(ProductActions.clearProductList());
-    navigation.goBack();
   };
 
   const renderMessageForNoProducts = () => {
@@ -102,6 +84,13 @@ const ProductListingContainer: React.SFC<Props> = ({ route, navigation }: Props)
     );
   };
 
+  const onBackPress = () => {
+    dispatch(ProductActions.clearProductList());
+    navigation.goBack();
+  };
+  function onSortSelection(sort: any) {
+    setSelectedSortCode(sort);
+  }
   const renderHeader = () => {
     return (
       <View style={{ marginHorizontal: -16 }}>
@@ -113,16 +102,13 @@ const ProductListingContainer: React.SFC<Props> = ({ route, navigation }: Props)
   };
 
   const scrollY = new Animated.Value(0);
-  function onSortSelection(sort: any) {
-    setSelectedSortCode(sort);
-  }
 
   return (
     <>
       <MainContainer>
         <FullHeader />
-        {products?.length > 0 && <FilterComponent selectedSortCode={selectedSortCode} onSortingSelection={onSortSelection} />}
-        <SmallHeader onBackPress={onBackPress} title={route.params?.categoryName} subTitle={item?.title} containerStyle={styles.smallHeaderContainer} />
+        <FilterComponent selectedSortCode={selectedSortCode} onSortingSelection={onSortSelection} />
+        <SearchHeader title={t("searchHeader")} subTitle={route.params?.searchText} onBackPress={onBackPress} />
         <LoadingView style={styles.container} isLoading={loading && searchPageCount === 0}>
           <Animated.FlatList
             showsVerticalScrollIndicator={false}
@@ -132,7 +118,7 @@ const ProductListingContainer: React.SFC<Props> = ({ route, navigation }: Props)
             numColumns={1}
             bounces={false}
             renderItem={({ item }) => {
-              return <BestSellersCartItemComponent item={item} direction={"PLPList"} />;
+              return <BestSellersCartItemComponent item={item} />;
             }}
             onTouchStart={() => {
               onEndReachedCalledDuringMomentum = false;
@@ -156,4 +142,4 @@ const ProductListingContainer: React.SFC<Props> = ({ route, navigation }: Props)
   );
 };
 
-export default ProductListingContainer;
+export default SearchResultPageContainer;

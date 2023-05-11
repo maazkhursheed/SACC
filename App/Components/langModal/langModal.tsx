@@ -21,7 +21,7 @@ const LanguageModal: React.SFC<LanguageModalProps> = ({ visible, onClose }: Lang
       if (langData && langData?.direction === "rtl") {
         callChangeLanguageAlert(selLanguage, false);
       } else {
-        AsyncStorage.setItem("selLanguage", JSON.stringify(selLanguage));
+        await AsyncStorage.setItem("selLanguage", JSON.stringify(selLanguage));
         return i18n.changeLanguage(selLanguage?.code);
       }
     }
@@ -45,8 +45,10 @@ const LanguageModal: React.SFC<LanguageModalProps> = ({ visible, onClose }: Lang
             .then(r => {
               i18n.changeLanguage(data?.code);
               I18nManager.forceRTL(isRtl);
-              RNRestart.Restart();
-              return;
+              setTimeout(() => {
+                RNRestart.Restart();
+                return;
+              }, 500);
             })
             .catch(e => {
               console.log("error: ", e);

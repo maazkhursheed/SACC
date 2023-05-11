@@ -2,20 +2,14 @@ import { StyleSheet } from "react-native";
 import { Colors, Fonts } from "../../Themes";
 
 export default StyleSheet.create({
-  frequentlyOrderContainer: {
-    borderTopColor: Colors.offWhite,
-    borderTopWidth: 8,
-    flex: 1,
-    justifyContent: "space-between",
-  },
   marketingTileView: {
     flex: 1,
-    paddingBottom: 30,
     backgroundColor: Colors.white,
   },
   flashSaleWrapper: {
     backgroundColor: Colors.black,
-    paddingVertical: 20,
+    paddingBottom: 20,
+    paddingTop: 5,
     paddingHorizontal: 19,
     marginHorizontal: 16,
   },
@@ -61,7 +55,7 @@ export default StyleSheet.create({
   },
   callOutBrandcontainerStyle: {
     marginBottom: 15,
-    marginTop: 48,
+    marginTop: 35,
   },
   brandNamestyle: {
     width: "100%",
@@ -69,7 +63,7 @@ export default StyleSheet.create({
     marginVertical: 38,
   },
   BrandCrouselWrapper: {
-    marginBottom: 10,
+    marginTop: 20,
     paddingVertical: 30,
     backgroundColor: Colors.pink,
   },

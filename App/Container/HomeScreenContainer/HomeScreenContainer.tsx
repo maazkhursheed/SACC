@@ -46,8 +46,8 @@ const HomeScreen = ({ navigation }) => {
     brandLogoBannerCarousel: state?.home?.data?.brandLogoBannerCarousel ?? [],
     promotionBanner: state?.home?.data?.promotionBanner ?? [],
     tilesData: state?.home?.data?.tilesData ?? [],
-    isLoading: state?.home?.fetching,
     shoByCategorydata: state?.home?.data?.featureCategories ?? [],
+    isLoading: state?.home?.fetching,
   }));
 
   React.useEffect(() => {
@@ -100,9 +100,9 @@ const HomeScreen = ({ navigation }) => {
     const { t } = useTranslation();
     return (
       <ScrollView bounces={false} scrollEventThrottle={16} showsVerticalScrollIndicator={false}>
-        <LoadingView isLoading={isLoading && homeData.length === 0}>
+        <LoadingView isLoading={isLoading && homeData?.length === 0}>
           <View style={style.marketingTileView}>
-            {homePageRotatingBanner1.length > 0 && <MarketingTileCarousel marketingTileInfo={homePageRotatingBanner1} direction={"mainBanner"} />}
+            {homePageRotatingBanner1?.length > 0 && <MarketingTileCarousel marketingTileInfo={homePageRotatingBanner1} direction={"mainBanner"} />}
             {shoByCategorydata?.length > 0 && (
               <>
                 <ShopByCategory />
@@ -110,11 +110,11 @@ const HomeScreen = ({ navigation }) => {
               </>
             )}
             <BestSellersCartComponent data={bestSellerRecommandedProduct} showMore={true} direction={"bestSeller"} />
-            {homePageRotatingBanner1.length > 0 && <MarketingTileCarousel marketingTileInfo={tilesData} direction={"tiles"} />}
+            {homePageRotatingBanner1?.length > 0 && <MarketingTileCarousel marketingTileInfo={tilesData} direction={"tiles"} />}
             {tilesData.length > 0 && (
               <CallOutBrandComponent btnText={t("shopNow")} containerStyle={style.callOutBrandcontainerStyle} data={brandLogoBannerCarousel.slice(0, 4)} />
             )}
-            {promotionBanner.length > 0 && <FlashSale data={promotionBanner[0]} />}
+            {promotionBanner?.length > 0 && <FlashSale data={promotionBanner[0]} />}
             <BestSellersCartComponent data={ourRecommendations} headingTitle={t("ourRecommendations")} showMore={true} direction={"recommendate"} />
             <SignatureCollectionComponent
               btnText={t("shopNow")}
@@ -122,7 +122,7 @@ const HomeScreen = ({ navigation }) => {
               headingTitle={t("signatureCollections")}
               data={signCollection?.length > 2 ? signCollection.slice(0, 2) : signCollection}
             />
-            {brandsBanner.length > 0 && <BrandCrousel />}
+            {brandsBanner?.length > 0 && <BrandCrousel />}
           </View>
         </LoadingView>
       </ScrollView>

@@ -176,7 +176,7 @@ export const mapCategoriesItems = value => {
       const data = {
         categoryName: val?.name ?? "",
         Image: val?.media ? baseURL + val?.media?.url : "",
-        categoryId: val?.uid,
+        categoryId: R.takeLast(1, R.split("/", R.pathOr("", ["urlLink"], val)))[0],
         name: val?.name,
       };
       newArray.push(data);
@@ -194,6 +194,53 @@ export const mapSignatureCollectionrItems = value => {
         headline: val?.headline,
         Image: val?.media ? baseURL + val?.media?.url : "",
         message: val?.content,
+      };
+      newArray.push(data);
+    });
+    return newArray;
+  }
+};
+
+const mapGrandChildItems = value => {
+  const newArray = [];
+  if (RA.isNotNilOrEmpty(value)) {
+    value.map((val, index) => {
+      const data = {
+        title: R.pathOr("", ["entries", 0, "linkName"], val),
+        children: [],
+        url: R.takeLast(1, R.split("/", R.pathOr("", ["entries", 0, "url"], val)))[0],
+      };
+      newArray.push(data);
+    });
+    return newArray;
+  }
+};
+
+const mapChildItems = value => {
+  const newArray = [];
+  if (RA.isNotNilOrEmpty(value)) {
+    value.map((val, index) => {
+      const data = {
+        title: R.pathOr("", ["entries", 0, "linkName"], val),
+        children: val?.children?.length > 0 ? mapGrandChildItems(val?.children) : [],
+        isExpanded: false,
+        url: R.takeLast(1, R.split("/", R.pathOr("", ["entries", 0, "url"], val)))[0],
+      };
+      newArray.push(data);
+    });
+    return newArray;
+  }
+};
+
+export const mapNavigationItems = value => {
+  const newArray = [];
+  if (RA.isNotNilOrEmpty(value)) {
+    value.map((val, index) => {
+      const data = {
+        title: R.pathOr("", ["entries", 0, "linkName"], val),
+        children: val?.children?.length > 0 ? mapChildItems(val?.children) : [],
+        isExpanded: false,
+        url: R.takeLast(1, R.split("/", R.pathOr("", ["entries", 0, "url"], val)))[0],
       };
       newArray.push(data);
     });
@@ -293,6 +340,10 @@ export const mapHomeData = data => {
       } else if (val?.name == "Categories") {
         const CategoriesItems = mapCategoriesItems(R.pathOr(0, ["components", "component"], val));
         newArray.featureCategories = CategoriesItems?.length > 0 ? CategoriesItems : [];
+      } else if (val?.name == "Navigation Bar") {
+        const NavigationItems = mapNavigationItems(R.pathOr(0, ["components", "component", 0, "navigationNode", "children"], val));
+        console.log("Navigation Items : ", NavigationItems);
+        newArray.NavigationItems = NavigationItems?.length > 0 ? NavigationItems : [];
       }
     });
     return newArray;

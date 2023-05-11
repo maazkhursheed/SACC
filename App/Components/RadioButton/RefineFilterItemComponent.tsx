@@ -19,24 +19,28 @@ const RefineFilterItemComponent: React.FunctionComponent<Props> = ({ data, selec
     }
   };
   return (
-    <>
+    <View>
       {data?.name && (
-        <View key={data.name} style={styles.refineContainer}>
-          <TouchableOpacity
-            style={styles.refineRadioCircle}
-            onPress={() => {
-              handleValueChanges(R.pathOr("", ["query", "query", "value"])(data));
-              R.compose(onFacetTap, R.pathOr("", ["query", "query", "value"]))(data);
-            }}
-          >
-            {selectedValues.includes(data.name) && <View style={styles.refineSelectedButton} />}
-          </TouchableOpacity>
+        <TouchableOpacity
+          style={{ flexDirection: "row", paddingBottom: 17 }}
+          onPress={() => {
+            handleValueChanges(R.pathOr("", ["query", "query", "value"])(data));
+            R.compose(onFacetTap, R.pathOr("", ["query", "query", "value"]))(data);
+          }}
+        >
+          <View>
+            {selectedValues.includes(R.pathOr("", ["query", "query", "value"])(data)) || R.pathOr(false, ["selected"])(data) === true ? (
+              <View style={styles.refineSelectedButton} />
+            ) : (
+              <View style={styles.refineRadioCircle} />
+            )}
+          </View>
           <Text style={styles.refineRadioText}>
             {data.name} {`(${data.count})`}
           </Text>
-        </View>
+        </TouchableOpacity>
       )}
-    </>
+    </View>
   );
 };
 export default RefineFilterItemComponent;

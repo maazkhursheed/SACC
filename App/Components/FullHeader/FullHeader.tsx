@@ -1,37 +1,52 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, SafeAreaView, TextInput, TouchableOpacity, View } from "react-native";
+import { useDispatch } from "react-redux";
 import { isNotNilOrEmpty } from "~root/Lib/CommonHelper";
 import { accessibility } from "~root/Lib/DataHelper";
 import { isRTL } from "../../i18n";
+import CloseButton from "../../Images/closeButton/CloseButton.svg";
 import BurgerLogo from "../../Images/HeaderLogo/BurgerLogo.svg";
-import Images from "../../Themes/Images";
+import { ProductActions } from "../../Reducers/ProductReducers";
+import { Images } from "../../Themes";
 import styles from "./FullHeaderStyles";
 interface OwnProps {
-  onPressSearch?: any;
   onPressCart?: any;
   onPressWish?: any;
   children?: any;
   style?: any;
   isSearch?: boolean;
   isHam?: boolean;
-  parentNavigation?: any;
 }
 
 interface StateProps {}
 
 type Props = StateProps & OwnProps;
 
-const FullHeader: React.SFC<Props> = ({ onPressSearch, children, style, onPressCart, onPressWish, parentNavigation }: Props) => {
+const FullHeader: React.SFC<Props> = ({ children, style, onPressCart, onPressWish }: Props) => {
   const navigation = useNavigation();
   const { t } = useTranslation();
+  const [searchText, setSearchText] = useState("");
+  const dispatch = useDispatch();
   const onNavigate = useCallback(() => {
-    // navigation.navigate("MyProfileContainer", {
-    //   screen: "MyProfileSelection",
-    // });
     navigation.toggleDrawer();
   }, []);
+
+  const submit = text => {
+    if (text.length > 0) {
+      apiCall({ query: text, currentPage: "0" }, 1);
+      navigation.navigate("SearchPage", { searchText: text });
+    }
+  };
+
+  const clear = () => {
+    setSearchText("");
+  };
+
+  const apiCall = (param, callback) => {
+    dispatch(ProductActions.requestSearchSolr(param, callback));
+  };
 
   return (
     <>
@@ -39,9 +54,14 @@ const FullHeader: React.SFC<Props> = ({ onPressSearch, children, style, onPressC
       <View style={[styles.container, style]}>
         <View style={[styles.titleIconContainer]}>
           <View style={{ flexDirection: "row" }}>
-            <TouchableOpacity {...accessibility("profileBtnTxt")} style={styles.profileBtn} onPress={onNavigate}>
-              <BurgerLogo />
-            </TouchableOpacity>
+            {navigation?.toggleDrawer ? (
+              <TouchableOpacity {...accessibility("profileBtnTxt")} style={styles.profileBtn} onPress={onNavigate}>
+                <BurgerLogo />
+              </TouchableOpacity>
+            ) : (
+              <View style={styles.invisible} />
+            )}
+
             <View style={styles.titleView}>
               {/* <AppLogo/> */}
               {isRTL() != "rtl" ? (
@@ -65,8 +85,21 @@ const FullHeader: React.SFC<Props> = ({ onPressSearch, children, style, onPressC
             style={[styles.textInput, isRTL() == "rtl" && { textAlign: "right" }]}
             placeholder={t("placeholderSearch")}
             placeholderTextColor={"#999999"}
+            onSubmitEditing={() => submit(searchText)}
+            onChangeText={text => {
+              setSearchText(text);
+            }}
+            autoFocus={true}
+            value={searchText}
           />
-          <TouchableOpacity style={styles.touchableOpacity} onPress={onPressSearch}>
+          {searchText?.length > 0 ? (
+            <TouchableOpacity style={styles.cleareBtn} onPress={clear}>
+              <CloseButton />
+            </TouchableOpacity>
+          ) : (
+            <></>
+          )}
+          <TouchableOpacity style={styles.touchableOpacity} onPress={() => submit(searchText)}>
             <Image resizeMode={"contain"} style={styles.search} source={Images.SearchBold} />
           </TouchableOpacity>
         </View>

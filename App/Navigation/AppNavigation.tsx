@@ -15,6 +15,7 @@ import DeleteAccountScreen from "../Container/DeleteAccountScreenContainer/Delet
 import HomeScreenContainer from "../Container/HomeScreenContainer/HomeScreenContainer";
 import ProductListingContainer from "../Container/ProductListingContainer/ProductListingContainer";
 import ProfileScreenContainer from "../Container/ProfileScreenContainer/ProfileScreenContainer";
+import SearchResultPageContainer from "../Container/SearchResultPageContainer/SearchResultPageContainer";
 import colors from "../Themes/Colors";
 import CategoryTabIcon from "./../Images/bottombarIcon/category.svg";
 import CategoryTabIconBlack from "./../Images/bottombarIcon/categoryBlack.svg";
@@ -48,6 +49,7 @@ function Category() {
       screenOptions={{ headerShown: false, drawerLabelStyle: { color: colors.white }, drawerStyle: { backgroundColor: colors.black, width: "100%" } }}
     >
       <SettingStack.Screen name="Categories" component={CategoriesPage} />
+      <SettingStack.Screen name="SearchPage" component={SearchResultPageContainer} />
     </SettingStack.Navigator>
   );
 }
@@ -132,7 +134,20 @@ function DashboardTabNav() {
           tabBarLabelStyle: { fontSize: 12 },
           tabBarActiveTintColor: colors.darkBlue,
           tabBarInactiveTintColor: colors.darkGrey,
-          tabBarStyle: routeName === "ProductsListing" ? { display: "none" } : { display: "flex" },
+          tabBarStyle:
+            routeName === "ProductsListing"
+              ? { display: "none" }
+              : {
+                  borderTopLeftRadius: 25,
+                  borderTopRightRadius: 25,
+                  borderTopColor: "transparent",
+                  backgroundColor: colors.white,
+                  shadowColor: colors.shadow,
+                  shadowOffset: { width: 0, height: 0 },
+                  shadowOpacity: 1,
+                  shadowRadius: 7,
+                  elevation: 3,
+                },
         };
       }}
     >
@@ -148,6 +163,7 @@ function PrimaryNav() {
     <PrimaryStack.Navigator initialRouteName="Dashboard" headerMode={"none"}>
       <PrimaryStack.Screen name="HomeScreen" component={Home} />
       <PrimaryStack.Screen name="ProductsListing" component={ProductListingContainer} />
+      <PrimaryStack.Screen name="SearchPage" component={SearchResultPageContainer} />
       <PrimaryStack.Screen name="Categories" component={Category} />
       <PrimaryStack.Screen name="ProfileContainer" component={MyProfile} />
       <PrimaryStack.Screen name="DeleteAccountContainer" component={DeleteAccount} />

@@ -9,7 +9,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.steel,
     marginBottom: 20,
-    paddingBottom: 15,
+    paddingBottom: 5,
   },
   image: {
     width: "100%",
@@ -38,5 +38,6 @@ export default StyleSheet.create({
   },
   textStyle: {
     ...Fonts.style.openSans16BoldWhite,
+    paddingVertical: 8,
   },
 });

@@ -12,6 +12,8 @@ const images = {
   CartHeader: require("../Images/CartHeader/CartHeader.png"),
   Wish: require("../Images/Wishlist/Wishlist.png"),
   SearchBold: require("../Images/SearchBold/SearchBold.png"),
+  NextIcon: require("../Images/nextIcon/nextIcon.png"),
+  CarosalBackIcon: require("../Images/carosalBackIcon/carosalBackIcon.png"),
 };
 
 export default images;

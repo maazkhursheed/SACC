@@ -27,6 +27,12 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  invisible: {
+    marginRight: 24,
+    marginLeft: 24,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   touchableOpacityStyle: {},
   touchableOpacity: {
     height: 40,
@@ -72,6 +78,7 @@ export default StyleSheet.create({
     marginHorizontal: 15,
     justifyContent: "space-between",
     borderRadius: 5,
+    alignItems: "center",
   },
   textInput: {
     height: 40,
@@ -84,4 +91,5 @@ export default StyleSheet.create({
     borderTopRightRadius: 0,
     ...Fonts.style.openSans14Regular,
   },
+  cleareBtn: { backgroundColor: "#FFF", height: 40, padding: 10, justifyContent: "center" },
 });

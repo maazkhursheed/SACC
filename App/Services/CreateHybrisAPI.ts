@@ -48,6 +48,7 @@ export default (): HybrisAPI => {
           generateURIfromObject({
             query: R.compose(R.ifElse(R.isNil, R.identity, R.compose(encodeURIComponent, R.replace(/[+]/g, " "), decodeURIComponent, R.prop("query"))))(query),
             currentPage: query && query.currentPage,
+            sort: (query && query?.sort) ?? "relevance",
             fields: "FULL",
           }),
         params,

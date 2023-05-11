@@ -23,7 +23,9 @@ const BestSellersCartComponent: React.FunctionComponent<Props> = ({ data, headin
     <FlatList
       contentContainerStyle={[{ paddingHorizontal: 16 }, containerStyle]}
       data={categories}
-      ListHeaderComponent={<HeaderTitle title={headingTitle} count={data?.length ?? 0} />}
+      ListHeaderComponent={() => {
+        return <View>{categories?.length > 0 && <HeaderTitle title={headingTitle} count={data?.length ?? 0} />}</View>;
+      }}
       renderItem={({ item }) => {
         return <BestSellersCartItemComponent item={item} direction={direction} />;
       }}
@@ -40,14 +42,14 @@ const BestSellersCartComponent: React.FunctionComponent<Props> = ({ data, headin
           {categories?.length > 0 && <Divider />}
         </>
       }
-      ListEmptyComponent={() => {
-        return (
-          <View>
-            <Text>{direction == "recommendate" ? t("noRecommendedProduct") : t("noBestSellerProducts")}</Text>
-            <Divider />
-          </View>
-        );
-      }}
+      // ListEmptyComponent={() => {
+      //   return (
+      //     <View>
+      //       <Text>{direction == "recommendate" ? t("noRecommendedProduct") : t("noBestSellerProducts")}</Text>
+      //       <Divider />
+      //     </View>
+      //   );
+      // }}
       keyExtractor={(item, index) => index.toString()}
     />
   );

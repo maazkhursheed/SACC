@@ -9,14 +9,18 @@ import { RootState } from "../../Reducers";
 import styles from "../FilterComponent/FilterComponentStyle";
 import RefineComponent from "../RefineComponent/RefineComponent";
 import SortByComponent from "../SortByComponent/SortByComponent";
-
-const FilterComponent = () => {
+interface OwnProps {
+  onSortingSelection: (code: string) => void;
+  selectedSortCode: string;
+}
+type Props = OwnProps;
+const FilterComponent: React.FunctionComponent<Props> = ({ onSortingSelection, selectedSortCode }: Props) => {
   const { t } = useTranslation();
   const refRBSheet = useRef();
   const sortRBSheet = useRef();
   const { facets, sorts } = useSelector((state: RootState) => ({
     facets: state.product?.data?.facets ?? [],
-    sorts: state.product?.data?.sorts ?? [],
+    sorts: state.product?.data?.sorts ?? state.product?.dataSearch?.sorts ?? [],
   }));
   const [facetQuery, setFacetQuery] = useState("");
 
@@ -45,7 +49,13 @@ const FilterComponent = () => {
           },
         }}
       >
-        <SortByComponent item={sorts} onBackPress={() => sortRBSheet.current.close()} />
+        <SortByComponent
+          item={sorts}
+          onSortingSelection={onSortingSelection}
+          selectedSortCode={selectedSortCode}
+          onBackPress={() => sortRBSheet.current.close()}
+          sortRef={sortRBSheet}
+        />
       </RBSheet>
       <RBSheet
         ref={refRBSheet}

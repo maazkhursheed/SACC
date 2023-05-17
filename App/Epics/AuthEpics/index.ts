@@ -42,3 +42,26 @@ export const epicAuth: Epic = (action$, state$, { api }: IDependencies) =>
       );
     }),
   );
+
+export const DeleteUserEpic: Epic = (action$, state$, { api }: IDependencies) =>
+  action$.pipe(
+    ofType(getType(AuthAction.deleteAccount)),
+    mergeMap(action => {
+      const reqParams = {
+        username: action.payload.username,
+        authToken: action.payload.auth,
+      };
+      return api.hybris.deleteAccountApi(reqParams).pipe(
+        mergeMap(response => {
+          if (response.ok) {
+            return of(AuthAction.deleteAccountSuccess());
+          } else {
+            if (action.meta && action.meta.onFailure) {
+              action.meta.onFailure(response?.data?.error_description);
+            }
+            return of(AuthAction.deleteAccountFailure());
+          }
+        }),
+      );
+    }),
+  );

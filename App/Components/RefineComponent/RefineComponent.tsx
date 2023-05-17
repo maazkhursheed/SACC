@@ -2,7 +2,7 @@ import * as R from "ramda";
 import * as React from "react";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
 import RangeSlider from "rn-range-slider";
 import Multiply from "../../Images/MultiplyIcon/multiply-line.svg";
@@ -44,7 +44,7 @@ const RefineComponent: React.FunctionComponent<Props> = ({ facets, onBackPress, 
 
   const Thumb = () => (
     <View style={styles.rootThump}>
-      <View style={styles.innerRootThump} />
+      <View style={styles.innerRootThump}></View>
     </View>
   );
 
@@ -111,7 +111,7 @@ const RefineComponent: React.FunctionComponent<Props> = ({ facets, onBackPress, 
   };
 
   return (
-    <View>
+    <>
       <View style={styles.subContainer}>
         <Text numberOfLines={1} style={styles.title}>
           {t("refine")}
@@ -120,49 +120,51 @@ const RefineComponent: React.FunctionComponent<Props> = ({ facets, onBackPress, 
           <Multiply style={styles.crossIcon} />
         </TouchableOpacity>
       </View>
-      <View>
-        <TouchableOpacity onPress={handleResetClick}>
-          <Text style={styles.clear}>{t("clearAll")}</Text>
-        </TouchableOpacity>
-        <View style={{ paddingHorizontal: 20 }}>
-          <Text style={styles.titleBrand}>{t("priceRange")}</Text>
-          <Divider style={styles.divider} />
-        </View>
-        <View style={styles.containerSlider}>
-          <RangeSlider
-            min={50}
-            max={2000}
-            step={100}
-            renderThumb={renderThumb}
-            renderRail={renderRail}
-            renderRailSelected={renderRailSelected}
-            renderLabel={renderLabel}
-            renderNotch={renderNotch}
-            onValueChanged={handleValueChange}
-          />
-        </View>
-        <View style={styles.priceDataFoundContainer}>
-          <Text style={styles.textSAR}>{getObtainedPriceFacet()?.name}</Text>
-          <Text style={styles.textDataCount}>
-            {getObtainedPriceFacet()?.count} {t("productFound")}
-          </Text>
-        </View>
-        <FlatList
-          data={facets}
-          style={{ paddingHorizontal: 20, marginBottom: 100, backgroundColor: "red" }}
-          renderItem={({ item }) => (
-            <RefineFacetsComponent
-              ref={refineFacetsRef}
-              facets={item}
-              onFacetTapped={(queryStr: string) => onFacetTapped(queryStr)}
-              showMore={true}
-              selectedValues={selectedValues}
-              setSelectedValues={setSelectedValues}
+      <ScrollView style={[styles.scrollContainer, { flexGrow: 1 }]} showsVerticalScrollIndicator={false}>
+        <View style={{ flex: 1 }}>
+          <TouchableOpacity onPress={handleResetClick}>
+            <Text style={styles.clear}>{t("clearAll")}</Text>
+          </TouchableOpacity>
+          <View style={{ paddingHorizontal: 20 }}>
+            <Text style={styles.titleBrand}>{t("priceRange")}</Text>
+            <Divider style={styles.divider} />
+          </View>
+          <View style={styles.containerSlider}>
+            <RangeSlider
+              min={50}
+              max={2000}
+              step={10}
+              renderThumb={renderThumb}
+              renderRail={renderRail}
+              renderRailSelected={renderRailSelected}
+              renderLabel={renderLabel}
+              renderNotch={renderNotch}
+              onValueChanged={handleValueChange}
             />
-          )}
-          keyExtractor={(_, index) => index.toString()}
-        />
-      </View>
+          </View>
+          <View style={styles.priceDataFoundContainer}>
+            <Text style={styles.textSAR}>{getObtainedPriceFacet()?.name}</Text>
+            <Text style={styles.textDataCount}>{getObtainedPriceFacet()?.count} {t("productFound")}
+            </Text>
+          </View>
+          <View style={{ paddingHorizontal: 20 }}>
+            <FlatList
+              data={facets}
+              renderItem={({ item }) => (
+                <RefineFacetsComponent
+                  ref={refineFacetsRef}
+                  facets={item}
+                  onFacetTapped={(queryStr: string) => onFacetTapped(queryStr)}
+                  showMore={true}
+                  selectedValues={selectedValues}
+                  setSelectedValues={setSelectedValues}
+                />
+              )}
+              keyExtractor={(_, index) => index.toString()}
+            />
+          </View>
+        </View>
+      </ScrollView>
       <View style={styles.fixedContainer}>
         <View style={styles.refineContainer}>
           <TouchableOpacity style={styles.cancelButton} onPress={onBackPress}>
@@ -173,7 +175,7 @@ const RefineComponent: React.FunctionComponent<Props> = ({ facets, onBackPress, 
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </>
   );
 };
 

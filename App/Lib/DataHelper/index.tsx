@@ -257,7 +257,10 @@ export const mapBestSellerItems = value => {
         inWishlist: val?.inWishlist,
         Image: val?.images?.length > 0 ? baseURL + val?.images[0].url : "",
         ProductDescription: val?.name,
-        Price: val?.price?.value,
+        Price: Number(Number(R.pathOr("0", ["price", "value"])(val)).toFixed(2)),
+        discountPrice: val?.discount?.discountPrice?.value ? Number(Number(R.pathOr("0", ["discount", "discountPrice", "value"])(val)).toFixed(2)) : 0,
+        percentage: val?.discount?.percentage ? Number(Number(R.pathOr("0", ["discount", "percentage"])(val)).toFixed(2)) : 0,
+        savingPrice: val?.discount?.saving?.value ? Number(Number(R.pathOr("0", ["discount", "saving", "value"])(val)).toFixed(2)) : 0,
       };
       newArray.push(data);
     });
@@ -359,7 +362,10 @@ export const mapSanitizedItems = R.curry((state, value) => {
     ProductDescription: value?.Description,
     UOM: value?.UnitOfMeasure || "",
     Availability: value?.Stock,
-    Price: value?.Price,
+    Price: Number(Number(R.pathOr("0", ["Price"])(value)).toFixed(2)),
+    discountPrice: value?.discount?.discountPrice?.value ? Number(Number(R.pathOr("0", ["discount", "discountPrice", "value"])(value)).toFixed(2)) : 0,
+    savingPrice: value?.discount?.saving?.value ? Number(Number(R.pathOr("0", ["discount", "saving", "value"])(value)).toFixed(2)) : 0,
+    percentage: value?.discount?.percentage ? Number(Number(R.pathOr("0", ["discount", "percentage"])(value)).toFixed(2)) : 0,
     Image: value?.Image,
     Brand: value?.Brand,
     IsTimberProduct: value?.IsTimberProduct,

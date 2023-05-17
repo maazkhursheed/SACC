@@ -4,14 +4,14 @@ import BottomFixedButton from "../BottomFixedButton/BottomFixedButton";
 import styles from "./CustomButtonsStyles";
 
 interface OwnProps {
-  navigateTo: any;
   buttonText1: string;
   buttonText2: string;
+  onSubmit?: any;
 }
 
 type Props = OwnProps;
 
-const CustomButtons: React.SFC<Props> = ({ navigateTo, buttonText1, buttonText2 }: Props) => {
+const CustomButtons: React.SFC<Props> = ({ buttonText1, buttonText2, onSubmit }: Props) => {
   const navigation = useNavigation();
   return (
     <>
@@ -23,14 +23,7 @@ const CustomButtons: React.SFC<Props> = ({ navigateTo, buttonText1, buttonText2 
         style={styles.bottomCancelBtnContainer}
         textStyle={styles.cancelButton}
       />
-      <BottomFixedButton
-        onPress={() => {
-          navigation.navigate(navigateTo);
-        }}
-        btnText={buttonText2}
-        style={styles.bottomBtnContainer}
-        textStyle={styles.secondButton}
-      />
+      <BottomFixedButton onPress={onSubmit} btnText={buttonText2} style={styles.bottomBtnContainer} textStyle={styles.secondButton} />
     </>
   );
 };

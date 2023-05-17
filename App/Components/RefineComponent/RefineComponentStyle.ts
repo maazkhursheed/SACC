@@ -83,8 +83,6 @@ export default StyleSheet.create({
     height: 50,
     backgroundColor: "white",
     marginBottom: 10,
-    position: "absolute",
-    bottom: 50,
   },
   scrollContainer: {
     flex: 1,

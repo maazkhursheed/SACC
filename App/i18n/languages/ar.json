@@ -43,7 +43,7 @@
     "signatureCollections": "مجموعات التوقيع",
     "recentlyViewed": "شوهدت مؤخرا",
     "bestSeller": "الأكثر مبيعًا",
-    "save": "يحفظ",
+    "save": "لقد حفظت",
     "show": "يعرض",
     "more": "أكثر",
     "showLess": "عرض أقل",
@@ -83,6 +83,12 @@
     "myAccount": "حسابي",
     "settings": "إعدادات",
     "searchHeader": "لقد بحثت عن",
-    "CategoriesHeader": "فئات"
+    "CategoriesHeader": "فئات",
+    "cart.removeAll": "حذف الكل",
+    "cart.itemsInCart": "العناصر في السلة",
+    "cart.viewDetails": "عرض التفاصيل",
+    "cart.subtotal": "المجموع الفرعي",
+    "cart.orderTotal": "الطلب الكلي",
+    "cart.checkout": "الدفع"
   }
 }

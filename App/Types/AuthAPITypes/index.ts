@@ -5,3 +5,8 @@ export interface IAuthTokenRequestParam {
   client_id: string;
   client_secret: string;
 }
+
+export interface IDeleteTokenRequestParams {
+  username: string;
+  authToken: string;
+}

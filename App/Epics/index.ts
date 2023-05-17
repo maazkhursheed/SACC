@@ -1,6 +1,6 @@
 import { combineEpics } from "redux-observable";
-import { epicSearchSolr } from "~root/Epics/ProductEpics";
-import { epicAuth } from "./AuthEpics";
+import { DeleteUserEpic, epicAuth } from "./AuthEpics";
 import { epicGetHomeScreenData } from "./HomeEpics";
+import { epicSearchSolr } from "./ProductEpics";
 
-export default combineEpics(epicSearchSolr, epicAuth, epicGetHomeScreenData);
+export default combineEpics(epicSearchSolr, epicAuth, epicGetHomeScreenData, DeleteUserEpic);

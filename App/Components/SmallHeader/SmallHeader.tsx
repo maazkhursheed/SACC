@@ -9,28 +9,29 @@ import Images from "../../Themes/Images";
 import styles from "./SmallHeaderStyle";
 
 interface OwnProps {
-  titleStyle: ViewStyle;
+  titleStyle?: ViewStyle;
   containerStyle?: ViewStyle;
   title?: string | React.ReactElement;
   subTitle?: string | React.ReactElement;
   actionItem?: React.ReactElement;
   onBackPress?: () => void;
+  titleTextStyle?: any;
 }
 
 type Props = OwnProps;
 
-const SmallHeader: React.SFC<Props> = ({ title, subTitle, titleStyle, onBackPress, actionItem, containerStyle }: Props) => {
+const SmallHeader: React.SFC<Props> = ({ title, subTitle, titleStyle, onBackPress, actionItem, containerStyle, titleTextStyle }: Props) => {
   const navigation = useNavigation();
   return (
     <AppThemeContext.Consumer>
       {value => (
         <View style={[styles.container, containerStyle]}>
           <TouchableOpacity onPress={onBackPress || navigation.goBack} style={styles.backIconContainer} {...accessibility("backIcon")}>
-            <Image resizeMode={"contain"} style={{ width: 20, height: 20 }} source={Images.BackIcon} />
+            <Image resizeMode={"contain"} style={{ width: 18, height: 18 }} source={Images.BackIcon} />
           </TouchableOpacity>
           <View style={[titleStyle, styles.titleContainer]}>
             {R.is(String, title) ? (
-              <Text numberOfLines={1} style={[styles.title, { color: Colors.black }]}>
+              <Text numberOfLines={1} style={[styles.title, { color: Colors.black }, titleTextStyle]}>
                 {title}
               </Text>
             ) : (

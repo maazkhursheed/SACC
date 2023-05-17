@@ -98,6 +98,7 @@ const colors = {
   h1: "#131010",
   promoText: "#DF4C6B",
   flashBtn: "#1C1C1B",
+  greenText: "#0E9900",
 };
 
 export default colors;

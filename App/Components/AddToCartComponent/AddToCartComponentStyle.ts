@@ -97,4 +97,5 @@ export default StyleSheet.create({
     fontWeight: "bold",
     color: colors.black,
   },
+  discountPrice: { textDecorationLine: "line-through" },
 });

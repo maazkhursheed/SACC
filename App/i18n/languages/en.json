@@ -43,7 +43,7 @@
     "signatureCollections": "Signature Collections",
     "recentlyViewed": "Recently Viewed",
     "bestSeller": "Best Seller",
-    "save": "Save",
+    "save": "You have saved",
     "show": "Show",
     "more": "more",
     "showLess": "Show less",
@@ -84,6 +84,13 @@
     "myAccount": "My Account",
     "settings": "Settings",
     "searchHeader": "You searched for",
-    "CategoriesHeader": "Categories"
+    "CategoriesHeader": "Categories",
+
+    "cart.removeAll": "Remove All",
+    "cart.itemsInCart": "Items in cart",
+    "cart.viewDetails": "View Details",
+    "cart.subtotal": "Subtotal",
+    "cart.orderTotal": "Order Total",
+    "cart.checkout": "CHECKOUT"
   }
 }

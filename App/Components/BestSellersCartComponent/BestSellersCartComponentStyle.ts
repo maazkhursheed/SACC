@@ -85,4 +85,5 @@ export default StyleSheet.create({
     marginRight: 5,
     ...Fonts.style.openSans12Regular,
   },
+  discountPrice: { textDecorationLine: "line-through" },
 });

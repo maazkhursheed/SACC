@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView, Text, View } from "react-native";
@@ -7,6 +8,7 @@ import Styles from "./DeleteAccountScreenStyles";
 
 const DeleteAccountFirstScreen = () => {
   const { t } = useTranslation();
+  const navigation = useNavigation();
 
   const TextComponent = () => {
     return (
@@ -23,7 +25,13 @@ const DeleteAccountFirstScreen = () => {
       <View style={Styles.Container}>
         <TextComponent />
         <View style={Styles.ButtonContainer}>
-          <CustomButtons buttonText1={t("CANCEL")} buttonText2={t("DELETE")} navigateTo="DeletePassAc" />
+          <CustomButtons
+            buttonText1={t("CANCEL")}
+            buttonText2={t("DELETE")}
+            onSubmit={() => {
+              navigation.navigate("DeletePassAc");
+            }}
+          />
         </View>
       </View>
     </SafeAreaView>

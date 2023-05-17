@@ -4,7 +4,7 @@ import R from "ramda";
 import { from } from "rxjs";
 import { HybrisAPI } from "~root/Services/Api";
 import { generateURIfromObject } from "../Lib/CommonHelper";
-import { IAuthTokenRequestParam } from "../Types/AuthAPITypes";
+import { IAuthTokenRequestParam, IDeleteTokenRequestParams } from "../Types/AuthAPITypes";
 import { ISearchSolrParams } from "../Types/SearchAPITypes";
 
 const FB_PATH = "occ/v2/skysales-sa";
@@ -58,26 +58,31 @@ export default (): HybrisAPI => {
   const getHomeScreen = () => {
     return from(api.get(FB_PATH + "/cms/pages/mobileLandingPage?fields=FULL"));
   };
-  // ------
-  // STEP 3
-  // ------
-  //
-  // Return back a collection of functions that we would consider our
-  // interface.  Most of the time it'll be just the list of all the
-  // methods in step 2.
-  //
-  // Notice we're not returning back the `api` created in step 1?  That's
-  // because it is scoped privately.  This is one way to create truly
-  // private scoped goodies in JavaScript.
-  //
+
   const authorization = (bodyParams: IAuthTokenRequestParam) => {
     return from(
       api.post(
-        `https://api.c1ydyig1w-saudiairl1-d1-public.model-t.cc.commerce.ondemand.com/authorizationserver/oauth/token?client_id=${bodyParams.client_id}&client_secret=${bodyParams.client_secret}&grant_type=${bodyParams.grant_type}&username=${bodyParams.username}&password=${bodyParams.password}`,
+        `authorizationserver/oauth/token?client_id=${bodyParams.client_id}&client_secret=${bodyParams.client_secret}&grant_type=${bodyParams.grant_type}&username=${bodyParams.username}&password=${bodyParams.password}`,
         {},
         {
           headers: {
             "Content-Type": "application/json",
+          },
+        },
+      ),
+    );
+  };
+
+  const deleteAccountApi = (bodyParams: IDeleteTokenRequestParams) => {
+    return from(
+      api.delete(
+        FB_PATH + `/users/${bodyParams.username}`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "*/*",
+            Authorization: bodyParams.authToken,
           },
         },
       ),
@@ -89,5 +94,6 @@ export default (): HybrisAPI => {
     solrSearch,
     authorization,
     getHomeScreen,
+    deleteAccountApi,
   };
 };

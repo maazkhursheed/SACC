@@ -23,7 +23,6 @@ const BestSellersCartItemComponent: React.FunctionComponent<Props> = ({ item, di
   const { t } = useTranslation();
   const refRBSheet = useRef();
   const imgSource = item?.Image ? { uri: item?.Image } : { uri: imageUrl };
-
   return (
     <View style={[styles.listView, containerStyle]} {...accessibility("cartList")}>
       <View>
@@ -43,22 +42,23 @@ const BestSellersCartItemComponent: React.FunctionComponent<Props> = ({ item, di
         <View style={[styles.qtyView]}>
           <View style={{ flex: 1, marginRight: 10 }}>
             <PriceComponent style={styles.viewQtyValue} value={item?.Price} />
-            {item?.discountPrice && (
+            {item?.discountPrice ? (
               <View style={styles.discountValueWrapper}>
                 <View style={{ flex: 1 }}>
-                  <PriceComponent style={[styles.discountValue, { textDecorationLine: "line-through" }]} value={270} />
+                  <PriceComponent style={[styles.discountValue, styles.discountPrice]} value={item?.discountPrice} />
                   <View style={styles.discountText}>
                     <Text style={[styles.discountValue]} {...accessibility("productDetailsLabel")}>
                       {t("save")}{" "}
                     </Text>
-                    <PriceComponent style={[styles.discountValue]} value={133} />
+                    <PriceComponent style={[styles.discountValue]} value={item?.savingPrice} />
                     <Text style={[styles.discountValue]} {...accessibility("productDetailsLabel")}>
-                      {" "}
-                      (43%)
+                      {` (${item?.percentage}%)`}
                     </Text>
                   </View>
                 </View>
               </View>
+            ) : (
+              <></>
             )}
           </View>
           <TouchableOpacity style={styles.cartIconBtn} onPress={() => refRBSheet.current.open()}>

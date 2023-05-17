@@ -1,4 +1,6 @@
+import { useNavigation } from "@react-navigation/native";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 import { Text, TouchableOpacity, View } from "react-native";
 import FastImage from "react-native-fast-image";
 import Multiply from "../../Images/MultiplyIcon/multiply-line.svg";
@@ -17,6 +19,12 @@ type Props = OwnProps;
 
 const AddToCartComponent: React.FunctionComponent<Props> = ({ item, onBackPress }: Props) => {
   const imgSource = item?.Image ? { uri: item?.Image } : { uri: imageUrl };
+  const { t } = useTranslation();
+  const navigation = useNavigation();
+  const onProceed = () => {
+    onBackPress();
+    navigation.navigate("CartScreen");
+  };
   return (
     <>
       <View style={styles.subContainer}>
@@ -38,22 +46,23 @@ const AddToCartComponent: React.FunctionComponent<Props> = ({ item, onBackPress 
           <View style={[styles.qtyView]}>
             <View style={{ flex: 1, marginRight: 10 }}>
               <PriceComponent style={styles.viewQtyValue} value={item?.Price} />
-              {item?.discountPrice && (
+              {item?.discountPrice ? (
                 <View style={styles.discountValueWrapper}>
                   <View style={{ flex: 1 }}>
-                    <PriceComponent style={[styles.discountValue, { textDecorationLine: "line-through" }]} value={270} />
+                    <PriceComponent style={[styles.discountValue, styles.discountPrice]} value={item?.discountPrice} />
                     <View style={styles.discountText}>
-                      <Text style={styles.discountValue} {...accessibility("productDetailsLabel")}>
-                        {"You have saved"}{" "}
+                      <Text style={[styles.discountValue]} {...accessibility("productDetailsLabel")}>
+                        {t("save")}{" "}
                       </Text>
-                      <PriceComponent style={styles.discountValue} value={133} />
+                      <PriceComponent style={[styles.discountValue]} value={item?.savingPrice} />
                       <Text style={styles.discountValue} {...accessibility("productDetailsLabel")}>
-                        {" "}
-                        (43%)
+                        {` (${item?.percentage}%)`}
                       </Text>
                     </View>
                   </View>
                 </View>
+              ) : (
+                <></>
               )}
             </View>
           </View>
@@ -64,7 +73,7 @@ const AddToCartComponent: React.FunctionComponent<Props> = ({ item, onBackPress 
       </View>
       <Text style={styles.itemsCount}>{"2 items in your cart"}</Text>
       <Text style={styles.itemsTotalCount}>{"Subtotal: SAR 432.90"}</Text>
-      <TouchableOpacity style={styles.checkoutButton} onPress={onBackPress}>
+      <TouchableOpacity style={styles.checkoutButton} onPress={onProceed}>
         <Text style={styles.text}>{"VIEW CART & CHECKOUT"}</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.continueShopButton} onPress={onBackPress}>

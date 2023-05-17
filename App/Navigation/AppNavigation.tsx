@@ -23,6 +23,7 @@ import HomeTabIcon from "./../Images/bottombarIcon/home.svg";
 import HomeTabIconBlack from "./../Images/bottombarIcon/homeBlack.svg";
 import ProfileTabIcon from "./../Images/bottombarIcon/profile.svg";
 import ProfileTabIconBlack from "./../Images/bottombarIcon/profileBlack.svg";
+import CartScreen from "../Container/CartScreenContainer";
 
 const HomeStack = createDrawerNavigator();
 
@@ -73,7 +74,7 @@ const DeleteAccountStack = createStackNavigator();
 
 function DeleteAccount() {
   return (
-    <DeleteAccountStack.Navigator headerMode="none">
+    <DeleteAccountStack.Navigator headerMode="none" initialRouteName="DeleteAcFirstScreen">
       <DeleteAccountStack.Screen name="DeleteAcFirstScreen" component={DeleteAccountFirstScreen} />
       <DeleteAccountStack.Screen name="DeletePassAc" component={DeleteAccountPasswordScreen} />
       <DeleteAccountStack.Screen name="DeleteAc" component={DeleteAccountScreen} />
@@ -168,6 +169,7 @@ function PrimaryNav() {
       <PrimaryStack.Screen name="ProfileContainer" component={MyProfile} />
       <PrimaryStack.Screen name="DeleteAccountContainer" component={DeleteAccount} />
       <PrimaryStack.Screen name="Dashboard" component={DashboardTabNav} />
+      <PrimaryStack.Screen name="CartScreen" component={CartScreen} />
     </PrimaryStack.Navigator>
   );
 }

@@ -102,19 +102,6 @@ const Login = () => {
                 </View>
               </View>
               <View style={styles.inputeSectionWrapper}>
-                {/* {!R.isEmpty(formik.errors) && onClickNext && (
-                  <View style={[styles.errorWrapperStyle, { paddingVertical: 10, flexDirection: "row" }]}>
-                    <Text style={[styles.errorTextStyle]}>{Object.values(formik.errors)[0]}</Text>
-                    <TouchableOpacity
-                      onPress={() => {
-                        setOnClickNext(false);
-                      }}
-                      style={{ right: 20 }}
-                    >
-                      <CloseButton />
-                    </TouchableOpacity>
-                  </View>
-                )} */}
                 <CustomTextInput
                   label={t("login.enterEmail")}
                   inputLabelStyle={styles.inputLabelStyle}
@@ -127,7 +114,6 @@ const Login = () => {
                   textInputStyle={styles.inputTextStyle}
                   placeholderTextColor={Colors.darkGrey}
                   SVGIcon={CloseButton}
-                  // error={onClickNext && formik.errors.username}
                   inputwrapperStyle={[styles.inputwrapperStyle, onClickNext && formik.errors.username && { borderColor: Colors.pink }]}
                   autoFocus={true}
                 />
@@ -148,7 +134,6 @@ const Login = () => {
                   textInputStyle={styles.inputTextStyle}
                   placeholderTextColor={Colors.darkGrey}
                   autoCorrect={false}
-                  // error={onClickNext && formik.errors.password}
                   inputwrapperStyle={[styles.inputwrapperStyle, onClickNext && formik.errors.username && { borderColor: Colors.pink }]}
                 />
                 <Text style={[styles.clickHere, styles.forgotPass]} onPress={() => setShowResetModal(true)}>

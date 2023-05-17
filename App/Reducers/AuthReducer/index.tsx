@@ -10,6 +10,9 @@ const actionCreators = {
   signInSuccess: createAction("SIGN_IN_SUCCESS"),
   signInFailure: createAction("SIGN_IN_FAILURE"),
   signOut: createAction("SIGN_OUT"),
+  deleteAccount: createStandardAction("DELETE_ACCOUNT")<any, IAlertCallbacks>(),
+  deleteAccountSuccess: createAction("DELETE_ACCOUNT_SUCCESS"),
+  deleteAccountFailure: createAction("DELETE_ACCOUNT_FAILURE"),
 };
 
 export const AuthAction = actionCreators;
@@ -57,6 +60,23 @@ export const signOut: Reducer<ImmutableAuthState> = (state: ImmutableAuthState) 
     isLoading: false,
     isSignOut: true,
   });
+// @ts-ignore
+export const deleteAccount: Reducer<ImmutableAuthState> = (state: ImmutableAuthState) =>
+  state.merge({
+    isLoading: true,
+  });
+
+// @ts-ignore
+export const deleteAccountSuccess: Reducer<ImmutableAuthState> = (state: ImmutableAuthState) =>
+  state.merge({
+    isLoading: false,
+  });
+
+// @ts-ignore
+export const deleteAccountFailure: Reducer<ImmutableAuthState> = (state: ImmutableAuthState) =>
+  state.merge({
+    isLoading: false,
+  });
 /* ------------- Hookup Reducers To Types ------------- */
 
 const reducerMap: ReducerMap<typeof actionCreators, ImmutableAuthState> = {
@@ -64,6 +84,9 @@ const reducerMap: ReducerMap<typeof actionCreators, ImmutableAuthState> = {
   signOut,
   signInSuccess,
   signInFailure,
+  deleteAccount,
+  deleteAccountSuccess,
+  deleteAccountFailure,
 };
 
 const AuthReducer = mapReducers(INITIAL_STATE, reducerMap, actionCreators);

@@ -1,19 +1,20 @@
 import * as R from "ramda";
 import * as RA from "ramda-adjunct";
 import { Epic, ofType } from "redux-observable";
-import { of } from "rxjs";
+import { from, of } from "rxjs";
 import { mergeMap } from "rxjs/operators";
 import { getType } from "typesafe-actions";
-import { isResponseOk, mapSanitizedItems, sanitizeSolrSearchForDb } from "../../Lib/DataHelper";
+import { getSelectedLanguage } from "../../i18n";
+import { getUserParams, isResponseOk, mapSanitizedItems, sanitizeSolrSearchForDb } from "../../Lib/DataHelper";
 import { getSearchParameters } from "../../Lib/ProductHelper";
 import { IDependencies } from "../../Reducers/CreateStore";
+import { MyWishListActions } from "../../Reducers/MyWishListReducers";
 import { ProductActions } from "../../Reducers/ProductReducers/index";
-
 export const epicSearchSolr: Epic = (action$, state$, { api }: IDependencies) =>
   action$.pipe(
     ofType(getType(ProductActions.requestSearchSolr)),
-    mergeMap(action => {
-      const params = getSearchParameters(state$.value);
+    mergeMap(async action => {
+      const params = { ...getSearchParameters(state$.value), authToken: await getUserParams(), lang: getSelectedLanguage()?.code };
 
       const page = R.pathOr(0, ["payload", "currentPage"], action);
 
@@ -66,4 +67,57 @@ export const epicSearchSolr: Epic = (action$, state$, { api }: IDependencies) =>
         }),
       );
     }),
+    mergeMap(obj => from(obj)),
+  );
+
+export const epicAddItemToList: Epic = (action$, state$, { api }: IDependencies) =>
+  action$.pipe(
+    ofType(getType(MyWishListActions.requestAddToWishList)),
+    mergeMap(async action => {
+      const reqParams = {
+        code: action.payload.code,
+        authToken: await getUserParams(),
+        langCode: getSelectedLanguage()?.code,
+      };
+      return api.hybris.addItemToWishListApi(reqParams).pipe(
+        mergeMap(response => {
+          if (response.ok) {
+            action.meta.onSuccess(response?.data);
+            return of(MyWishListActions.addItemToSuccess({ response }, ""));
+          } else {
+            if (action.meta && action.meta.onFailure) {
+              action.meta.onFailure(response?.data?.error_description);
+            }
+            return of(MyWishListActions.addItemToFailure({ response }, ""));
+          }
+        }),
+      );
+    }),
+    mergeMap(obj => from(obj)),
+  );
+
+export const epicRemoveItemFromList: Epic = (action$, state$, { api }: IDependencies) =>
+  action$.pipe(
+    ofType(getType(MyWishListActions.requestRemoveFromWishList)),
+    mergeMap(async action => {
+      const reqParams = {
+        code: action.payload.code,
+        authToken: await getUserParams(),
+        langCode: getSelectedLanguage()?.code,
+      };
+      return api.hybris.removeItemFromWishListApi(reqParams).pipe(
+        mergeMap(response => {
+          if (response.ok) {
+            action.meta.onSuccess(response?.data);
+            return of(MyWishListActions.removedItemFromSuccess({ response }, ""));
+          } else {
+            if (action.meta && action.meta.onFailure) {
+              action.meta.onFailure(response?.data?.error_description);
+            }
+            return of(MyWishListActions.removedItemFromFailure({ response }, ""));
+          }
+        }),
+      );
+    }),
+    mergeMap(obj => from(obj)),
   );

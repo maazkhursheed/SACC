@@ -11,6 +11,7 @@ export interface ISearchSolrParams {
   sort: string;
   query: string;
   currentPage?: string;
+  auth?: string;
 }
 
 export interface IConfirmOrderRequestBody {

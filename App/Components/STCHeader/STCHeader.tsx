@@ -6,6 +6,8 @@ import styles from "./STCHeaderStyles";
 interface OwnProps {
   title: string;
   titleStyle?: any;
+  leftItemStyle?: any;
+  rightItemStyle?: any;
   leftItem?: React.ReactElement;
   rightItem?: React.ReactElement;
   style?: any;
@@ -19,6 +21,8 @@ type Props = OwnProps;
 const STCHeader: React.SFC<Props> = ({
   title,
   titleStyle,
+  leftItemStyle,
+  rightItemStyle,
   leftItem,
   rightItem,
   style,
@@ -35,11 +39,11 @@ const STCHeader: React.SFC<Props> = ({
         </View>
       )}
       <View style={[styles.header, headerContainerStyle]}>
-        <View style={[styles.items, styles.viewMinWidth]}>{leftItem}</View>
+        <View style={[styles.items, styles.viewMinWidth, leftItemStyle]}>{leftItem}</View>
         <Text ref={view => {}} style={[styles.headerTitle, titleStyle]} {...accessibility("commonHeaderLabel")}>
           {title && title.length > 23 ? title.substr(0, 22) + "..." : title}
         </Text>
-        <View style={[styles.items, styles.viewMinWidth]}>{rightItem}</View>
+        <View style={[styles.items, styles.viewMinWidth, rightItemStyle]}>{rightItem}</View>
       </View>
     </View>
   );

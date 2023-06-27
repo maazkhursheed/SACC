@@ -57,7 +57,13 @@ const DeleteAccountScreen = () => {
       <View style={Styles.Container}>
         <TextComponent />
         <View style={Styles.ButtonContainer}>
-          <CustomButtons buttonText1={t("CANCEL")} buttonText2={t("DELETE")} onSubmit={handleOnSubmit} />
+          <CustomButtons
+            buttonText1={t("CANCEL")}
+            buttonText2={t("DELETE")}
+            onSubmit={() => {
+              handleOnSubmit();
+            }}
+          />
         </View>
       </View>
     </SafeAreaView>

@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>204130088047-p9ucjrf90qa5qs3ajjqojo2vj4kosnfu.apps.googleusercontent.com</string>
+	<string>349837734959-9arbo37vb65lbsfalv8en3h1vtor62h5.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.204130088047-p9ucjrf90qa5qs3ajjqojo2vj4kosnfu</string>
+	<string>com.googleusercontent.apps.349837734959-9arbo37vb65lbsfalv8en3h1vtor62h5</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCDMH7ygUaYMM4emgbzm1WECj4xhDBK8VQ</string>
+	<string>AIzaSyAE-ykYuEilcfTVgSHnUgjcBdAq37B0FSI</string>
 	<key>GCM_SENDER_ID</key>
-	<string>204130088047</string>
+	<string>349837734959</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.royalcyber.sacc.sit</string>
+	<string>com.saac.skysales</string>
 	<key>PROJECT_ID</key>
-	<string>sacc-733ab</string>
+	<string>sacc-2300c</string>
 	<key>STORAGE_BUCKET</key>
-	<string>sacc-733ab.appspot.com</string>
+	<string>sacc-2300c.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:204130088047:ios:68f912b5b0fb038ab8899a</string>
+	<string>1:349837734959:ios:41f2caa1cbbd2669d382da</string>
+	<key>DATABASE_URL</key>
+	<string>https://sacc-2300c.firebaseio.com</string>
 </dict>
 </plist>

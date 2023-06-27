@@ -5,4 +5,5 @@ import CustomTextInput from "./CustomTextInput";
 import BottomFixedButton from "./BottomFixedButton";
 import SocialMediaLogin from "./SocialMediaLogin";
 import CustomWebView from "./CustomWebView";
-export { LanguageModal, GoogleButton, FbLogin, CustomTextInput, BottomFixedButton, SocialMediaLogin, CustomWebView };
+import CustomWebViewRedirection from "./CustomWebView/CustomWebViewRedirection";
+export { LanguageModal, GoogleButton, FbLogin, CustomTextInput, BottomFixedButton, SocialMediaLogin, CustomWebView, CustomWebViewRedirection };

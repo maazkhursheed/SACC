@@ -1,4 +1,4 @@
-package com.royalcyber.sacc.newarchitecture;
+package com.saac.skysales.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.royalcyber.sacc.BuildConfig;
-import com.royalcyber.sacc.newarchitecture.components.MainComponentsRegistry;
-import com.royalcyber.sacc.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.saac.skysales.BuildConfig;
+import com.saac.skysales.newarchitecture.components.MainComponentsRegistry;
+import com.saac.skysales.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

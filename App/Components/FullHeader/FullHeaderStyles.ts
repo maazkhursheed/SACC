@@ -55,6 +55,8 @@ export default StyleSheet.create({
     height: 30,
     width: 30,
   },
+  countContainer: { width: 20, height: 20, backgroundColor: "#6F263D", borderRadius: 10, marginLeft: -10, alignItems: "center", marginTop: 5 },
+  counterText: { color: "#fff", paddingTop: 1 },
   search: {
     alignSelf: "center",
     height: 17,
@@ -79,6 +81,8 @@ export default StyleSheet.create({
     justifyContent: "space-between",
     borderRadius: 5,
     alignItems: "center",
+    borderColor: "#989898",
+    borderBottomWidth: 1,
   },
   textInput: {
     height: 40,
@@ -92,4 +96,43 @@ export default StyleSheet.create({
     ...Fonts.style.openSans14Regular,
   },
   cleareBtn: { backgroundColor: "#FFF", height: 40, padding: 10, justifyContent: "center" },
+  suggestionWrapper: {
+    backgroundColor: "#fff",
+    position: "absolute",
+    marginHorizontal: 16,
+    width: "92%",
+    borderWidth: 1,
+    borderColor: "#989898",
+    marginTop: 103,
+  },
+  flatlistContainer: {
+    paddingHorizontal: 16,
+  },
+  keywordSuggestion: {
+    margin: 10,
+    flexDirection: "row",
+  },
+  keywordText: {
+    ...Fonts.style.openSans14Regular,
+  },
+  productSuggestionContainer: {
+    margin: 10,
+    flexDirection: "row",
+    marginLeft: 0,
+  },
+  imageWrapper: {
+    marginRight: 10,
+    paddingLeft: 5,
+  },
+  imageProductSuggestion: {
+    width: 50,
+    height: 50,
+  },
+  productSuggestionText: {
+    width: 250,
+    ...Fonts.style.openSans14SemiBold,
+  },
+  priceStyle: {
+    ...Fonts.style.openSans14SemiBoldPrice,
+  },
 });

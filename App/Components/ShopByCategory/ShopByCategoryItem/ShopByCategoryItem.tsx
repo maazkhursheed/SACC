@@ -30,23 +30,6 @@ const ShopByCategoryItem: React.SFC<Props> = ({ item, isEnd = false, loading = f
     <LoadingView isLoading={loading} style={[style.container, isEnd && { marginBottom: 0 }]}>
       <TouchableOpacity
         onPress={() => {
-          // requestSubCategories(item.urlLink, {
-          //   onSuccess: (data: any) => {
-          //     const subCat = R.pathOr([], ["subcategories"], data);
-          //     if (subCat.length > 0) {
-          //       navigation.navigate("SuperCategory", {
-          //         subCategories: data,
-          //       });
-          //     } else {
-          //       navigation.navigate("OrderProduct", {
-          //         screen: "MainPLP",
-          //         params: {
-          //           categoryId: `:Sort By:category:${data?.id}`,
-          //         },
-          //       });
-          //     }
-          //   },
-          // });
           navigation.navigate("ProductsListing", {
             screen: "MainPLP",
             categoryId: `:relevance:category:${item?.categoryId}`,
@@ -58,7 +41,7 @@ const ShopByCategoryItem: React.SFC<Props> = ({ item, isEnd = false, loading = f
         style={style.categoryItemWrapper}
       >
         <FastImage source={imgSource} style={style.imageStyle} resizeMode={FastImage.resizeMode.cover} />
-        <Text style={style.textStyle}>{item.categoryName || ""}</Text>
+        <Text style={style.textStyle}>{item?.categoryName || item?.name || ""}</Text>
       </TouchableOpacity>
     </LoadingView>
   );

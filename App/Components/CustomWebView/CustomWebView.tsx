@@ -1,9 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import { ActivityIndicator, Modal, SafeAreaView, Text, TouchableOpacity } from "react-native";
+import { useTranslation } from "react-i18next";
+import { ActivityIndicator, Image, Modal, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import { WebView, WebViewMessageEvent } from "react-native-webview";
 import STCHeader from "~root/Components/STCHeader/STCHeader";
 import { accessibility } from "~root/Lib/DataHelper";
+import { localizeImage } from "../../i18n";
 import styles from "./CustomWebViewStyles";
 interface OwnProps {
   source?: any;
@@ -22,6 +24,7 @@ type Props = StateProps & OwnProps;
 
 const CustomWebView: React.FunctionComponent<Props> = ({ source = "", title = "", closeSheet, onStatechanges, visible, isHeader, window }: Props) => {
   const navigation = useNavigation();
+  const { t } = useTranslation();
   const [canGoBack, setCanGoBack] = useState(false);
   const [canGoForward, setCanGoForward] = useState(false);
   const [currentUrl, setCurrentUrl] = useState("");
@@ -34,9 +37,7 @@ const CustomWebView: React.FunctionComponent<Props> = ({ source = "", title = ""
     return <ActivityIndicator color="#009b88" size="large" style={styles.ActivityIndicatorStyle} />;
   };
 
-  const onMessage = (event: WebViewMessageEvent) => {
-    console.log("onMessage event: ", event);
-  };
+  const onMessage = (event: WebViewMessageEvent) => {};
 
   const onNavigationStateChange = event => {
     setCanGoBack(event?.canGoBack);
@@ -55,26 +56,31 @@ const CustomWebView: React.FunctionComponent<Props> = ({ source = "", title = ""
             title={title ? title : ""}
             showHorizontalLine={false}
             titleStyle={title ? styles.headerTitleStyle : {}}
-            style={[{ paddingVertical: 10 }]}
+            style={styles.stgHeader}
+            headerContainerStyle={styles.headerContainerStyle}
             leftItem={
-              <TouchableOpacity onPress={closeSheet} {...accessibility("leftItemBtn")}>
-                <Text style={styles.cancelStyle}>{"Cancel"}</Text>
+              <TouchableOpacity style={styles.closeBtnStyle} onPress={refresh} {...accessibility("rightItemBtn")}>
+                <Image resizeMode={"contain"} source={localizeImage("WebReloadIcon")} />
               </TouchableOpacity>
             }
             rightItem={
-              <TouchableOpacity style={{}} onPress={refresh} {...accessibility("rightItemBtn")}>
-                <Text style={styles.reloadStyle}>{"Reload"}</Text>
+              <TouchableOpacity style={styles.closeBtnStyle} onPress={closeSheet} {...accessibility("leftItemBtn")}>
+                <Image resizeMode={"contain"} source={localizeImage("WebCloseIcon")} />
               </TouchableOpacity>
             }
+            rightItemStyle={{ minWidth: 0 }}
+            leftItemStyle={{ minWidth: 0 }}
           />
         )}
         {canGoBack || canGoForward ? (
           <STCHeader
-            headerContainerStyle={{ paddingBottom: 10 }}
+            headerContainerStyle={styles.headerContainerStyle}
             leftItem={
               canGoBack ? (
-                <TouchableOpacity onPress={webViewgoback} {...accessibility("rightPrevmBtn")}>
-                  <Text style={styles.cancelStyle}>{"Previous"}</Text>
+                <TouchableOpacity onPress={webViewgoback} style={styles.nextTextBtn} {...accessibility("rightPrevmBtn")}>
+                  <Image resizeMode={"contain"} source={localizeImage("WebBackIcon")} />
+                  <View style={styles.septaror}></View>
+                  <Text style={styles.cancelStyle}>{t("Previous")}</Text>
                 </TouchableOpacity>
               ) : (
                 <></>
@@ -82,8 +88,10 @@ const CustomWebView: React.FunctionComponent<Props> = ({ source = "", title = ""
             }
             rightItem={
               canGoForward ? (
-                <TouchableOpacity onPress={webViewNext} {...accessibility("leftnextBtn")}>
-                  <Text style={styles.cancelStyle}>{"Next"}</Text>
+                <TouchableOpacity style={styles.nextTextBtn} onPress={webViewNext} {...accessibility("leftnextBtn")}>
+                  <Text style={styles.cancelStyle}>{t("Next")}</Text>
+                  <View style={styles.septaror}></View>
+                  <Image resizeMode={"contain"} source={localizeImage("WebNextIcon")} />
                 </TouchableOpacity>
               ) : (
                 <></>

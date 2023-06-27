@@ -5,9 +5,8 @@ import { Image, Text, TouchableOpacity, View, ViewStyle } from "react-native";
 import { accessibility } from "~root/Lib/DataHelper";
 import { Colors } from "~root/Themes";
 import AppThemeContext from "~root/Themes/AppThemeContext";
-import Images from "../../Themes/Images";
+import { localizeImage } from "../../i18n";
 import styles from "./SearchHeaderStyle";
-
 interface OwnProps {
   titleStyle: ViewStyle;
   title?: string | React.ReactElement;
@@ -25,7 +24,7 @@ const SearchHeader: React.SFC<Props> = ({ title, subTitle, titleStyle, onBackPre
       {value => (
         <View style={styles.container}>
           <TouchableOpacity onPress={onBackPress || navigation.goBack} style={styles.backIconContainer} {...accessibility("backIcon")}>
-            <Image resizeMode={"contain"} style={{ width: 20, height: 20 }} source={Images.BackIcon} />
+            <Image resizeMode={"contain"} style={{ width: 20, height: 20 }} source={localizeImage("BackIcon")} />
           </TouchableOpacity>
           <View style={[titleStyle, styles.titleContainer]}>
             {R.is(String, title) ? (

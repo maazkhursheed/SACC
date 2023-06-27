@@ -2,7 +2,6 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
-import Config from "react-native-config";
 import { Button } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
 import * as Keychain from "react-native-keychain";
@@ -10,9 +9,12 @@ import { useDispatch } from "react-redux";
 import { CustomWebView, LanguageModal } from "../../Components";
 import Divider from "../../Components/Divider";
 import NavListItemButton from "../../Components/NavListItemButton/NavListItemButton";
+import AppConfig from "../../Config/AppConfig";
 import { getSelectedLanguage } from "../../i18n";
+import { isAnonymousLogin } from "../../Lib/DataHelper";
 import { encodingBase64 } from "../../Lib/ProfileHelper";
 import { AuthAction } from "../../Reducers/AuthReducer";
+import { HomeScreenActions } from "../../Reducers/HomeReducers/index";
 import { Token } from "../../Types/CommonTypes";
 import { getPassword } from "./../../utils";
 import styles from "./ProfileScreenStyles";
@@ -21,19 +23,26 @@ const ProfileScreen = () => {
   const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const [orderWebview, setOrderWebView] = useState(false);
+  const [wishListWebview, setWishListWebView] = useState(false);
   const [profileWebview, setProfileWebView] = useState(false);
   const [updatePassWebview, setUpdatePassWebView] = useState(false);
   const [updateEmailWebview, setUpdateEmailWebView] = useState(false);
   const [addressWebview, setAddressWebView] = useState(false);
+  const [refreshHomeApi, setRefreshHomeApi] = useState(false);
+  const [supportTicketsWebView, setSupportTicketsWebView] = useState(false);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [pass, getPass] = useState();
+  const [isGuestLoggedIn, getIsGuestLoggedIn] = useState();
 
   useEffect(() => {
     (async () => {
       const passwordVal = await getPassword();
-
-      getPass(passwordVal);
+      const isGuest = await isAnonymousLogin();
+      getIsGuestLoggedIn(isGuest);
+      if (passwordVal) {
+        getPass(passwordVal);
+      }
     })();
   }, []);
 
@@ -46,20 +55,44 @@ const ProfileScreen = () => {
     dispatch(AuthAction.signOut());
   };
 
+  const callRefreshApi = () => {
+    if (refreshHomeApi) {
+      dispatch(HomeScreenActions.requestHomeScreenData());
+      setRefreshHomeApi(false);
+    }
+    setWishListWebView(false);
+  };
+
+  const onStatechanges = event => {
+    if (event?.url.indexOf("/my-account/my-wishlist/remove/") > -1 || event?.url.indexOf("/my-account/my-wishlist/removeall") > -1) {
+      setRefreshHomeApi(true);
+    }
+  };
+
   const ProfileHeader: React.SFC = () => <Text style={styles.welcomeHeader}>{t("welcome") + t("user")}</Text>;
   const LinksHeading: React.SFC = ({ heading }) => <Text style={styles.quickLinksHeading}>{heading}</Text>;
   const QuickLinks: React.SFC = () => {
     return (
       <View>
         <LinksHeading heading={t("myAccount")} />
-        <NavListItemButton onPress={() => {}} btnText={t("myWishList")} />
+        <NavListItemButton
+          onPress={() => {
+            setWishListWebView(true);
+          }}
+          btnText={t("myWishList")}
+        />
         <NavListItemButton
           onPress={() => {
             setOrderWebView(true);
           }}
           btnText={t("orderHistory")}
         />
-        <NavListItemButton onPress={() => {}} btnText={t("supportTickets")} />
+        <NavListItemButton
+          onPress={() => {
+            setSupportTicketsWebView(true);
+          }}
+          btnText={t("supportTickets")}
+        />
         <NavListItemButton
           onPress={() => {
             setProfileWebView(true);
@@ -106,47 +139,67 @@ const ProfileScreen = () => {
       </View>
     );
   };
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ProfileHeader />
       <Divider style={styles.divider} />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <QuickLinks />
-        <Divider style={styles.divider} />
-        <MyAccounts />
-        <Divider style={styles.divider} />
+        {isGuestLoggedIn === true ? (
+          <></>
+        ) : (
+          <>
+            <QuickLinks />
+            <Divider style={styles.divider} />
+            <MyAccounts />
+            <Divider style={styles.divider} />
+          </>
+        )}
         <ChangeLanguage />
       </ScrollView>
       {isVisible && <LanguageModal visible={isVisible} onClose={onCloseLangModal} />}
-      <Button
-        title={t("signOut")}
-        containerStyle={styles.signOutContainer}
-        titleStyle={styles.signOutTitle}
-        buttonStyle={styles.signOutBtn}
-        onPress={() => {
-          const title = t("hello");
-          const logout = t("logOut");
-          const cancel = t("Cancel");
-          const OK = t("Ok");
-          Alert.alert(title, logout, [
-            {
-              text: cancel,
-              onPress: () => {},
-              style: "cancel",
-            },
-            {
-              text: OK,
-              onPress: () => {
-                handleLogout(dispatch);
+      {isGuestLoggedIn === true ? (
+        <Button
+          title={t("login.login")}
+          containerStyle={styles.signOutContainer}
+          titleStyle={styles.signOutTitle}
+          buttonStyle={styles.signOutBtn}
+          onPress={() => {
+            handleLogout(dispatch);
+          }}
+        />
+      ) : (
+        <Button
+          title={t("signOut")}
+          containerStyle={styles.signOutContainer}
+          titleStyle={styles.signOutTitle}
+          buttonStyle={styles.signOutBtn}
+          onPress={() => {
+            const title = t("hello");
+            const logout = t("logOut");
+            const cancel = t("Cancel");
+            const OK = t("Ok");
+            Alert.alert(title, logout, [
+              {
+                text: cancel,
+                onPress: () => {},
+                style: "cancel",
               },
-            },
-          ]);
-        }}
-      />
+              {
+                text: OK,
+                onPress: () => {
+                  handleLogout(dispatch);
+                },
+              },
+            ]);
+          }}
+        />
+      )}
+
       {orderWebview && (
         <CustomWebView
           source={{
-            uri: Config.WEB_VIEW_URL + "orders?source=Mobile",
+            uri: AppConfig.WEB_VIEW_URL + `my-account/orders?source=Mobile&lang=${getSelectedLanguage()?.code}`,
             headers: {
               Authorization: "Basic " + encodingBase64(pass?.username, pass?.password),
             },
@@ -160,7 +213,7 @@ const ProfileScreen = () => {
       {profileWebview && (
         <CustomWebView
           source={{
-            uri: Config.WEB_VIEW_URL + "update-profile?source=Mobile",
+            uri: AppConfig.WEB_VIEW_URL + `my-account/update-profile?source=Mobile&lang=${getSelectedLanguage()?.code}`,
             headers: {
               Authorization: "Basic " + encodingBase64(pass?.username, pass?.password),
             },
@@ -174,7 +227,7 @@ const ProfileScreen = () => {
       {updatePassWebview && (
         <CustomWebView
           source={{
-            uri: Config.WEB_VIEW_URL + "update-password?source=Mobile",
+            uri: AppConfig.WEB_VIEW_URL + `my-account/update-password?source=Mobile&lang=${getSelectedLanguage()?.code}`,
             headers: {
               Authorization: "Basic " + encodingBase64(pass?.username, pass?.password),
             },
@@ -188,7 +241,7 @@ const ProfileScreen = () => {
       {updateEmailWebview && (
         <CustomWebView
           source={{
-            uri: Config.WEB_VIEW_URL + "update-email?source=Mobile",
+            uri: AppConfig.WEB_VIEW_URL + `my-account/update-email?source=Mobile&lang=${getSelectedLanguage()?.code}`,
             headers: {
               Authorization: "Basic " + encodingBase64(pass?.username, pass?.password),
             },
@@ -202,7 +255,7 @@ const ProfileScreen = () => {
       {addressWebview && (
         <CustomWebView
           source={{
-            uri: Config.WEB_VIEW_URL + "address-book?source=Mobile",
+            uri: AppConfig.WEB_VIEW_URL + `my-account/address-book?source=Mobile&lang=${getSelectedLanguage()?.code}`,
             headers: {
               Authorization: "Basic " + encodingBase64(pass?.username, pass?.password),
             },
@@ -210,6 +263,34 @@ const ProfileScreen = () => {
           visible={addressWebview}
           onStatechanges={() => {}}
           closeSheet={() => setAddressWebView(false)}
+          isHeader={true}
+        />
+      )}
+      {wishListWebview && (
+        <CustomWebView
+          source={{
+            uri: AppConfig.WEB_VIEW_URL + `my-account/my-wishlist?source=Mobile&lang=${getSelectedLanguage()?.code}`,
+            headers: {
+              Authorization: "Basic " + encodingBase64(pass?.username, pass?.password),
+            },
+          }}
+          visible={wishListWebview}
+          onStatechanges={onStatechanges}
+          closeSheet={() => callRefreshApi()}
+          isHeader={true}
+        />
+      )}
+      {supportTicketsWebView && (
+        <CustomWebView
+          source={{
+            uri: AppConfig.WEB_VIEW_URL + "my-account/support-tickets?source=Mobile",
+            headers: {
+              Authorization: "Basic " + encodingBase64(pass?.username, pass?.password),
+            },
+          }}
+          visible={supportTicketsWebView}
+          onStatechanges={onStatechanges}
+          closeSheet={() => setSupportTicketsWebView(false)}
           isHeader={true}
         />
       )}

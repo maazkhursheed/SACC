@@ -12,7 +12,7 @@ const CustomDrawerContainer = ({ navigation }) => {
   const [children, setChildren] = React.useState([]);
   const [parentIndex, setParentIndex] = React.useState(-1);
   const { onlineMenuData } = useSelector((state: RootState) => ({
-    onlineMenuData: state?.home?.data.NavigationItems,
+    onlineMenuData: state?.home?.data?.NavigationItems,
   }));
   const [listDataSource, setListDataSource] = React.useState(onlineMenuData);
   const isFocused = useIsFocused();

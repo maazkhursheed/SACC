@@ -8,7 +8,7 @@ export default StyleSheet.create({
   },
   smallHeaderContainer: { borderBottomWidth: 0, paddingLeft: 0, height: Platform.OS === "ios" ? 50 : 40 },
   titleText: { ...Fonts.style.openSans18Bold },
-  containerStyle: { marginHorizontal: 16, marginTop: 16, marginBottom: 22 },
+  containerStyle: { paddingHorizontal: 16, paddingTop: 10 },
   viewMoreStyle: {
     ...Fonts.style.openSans14Regular,
     color: Colors.purple,
@@ -34,7 +34,7 @@ export default StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 25,
   },
-  refineContainer: { flex: 1, flexDirection: "column" },
+  refineContainer: { flex: 1, flexDirection: "column", alignItems: "flex-start" },
   refineButton: {
     backgroundColor: colors.black,
     padding: 10,
@@ -51,4 +51,29 @@ export default StyleSheet.create({
     color: colors.white,
   },
   total: { ...Fonts.style.openSans20Bold, color: colors.purple },
+  listContainerStyle: {
+    paddingHorizontal: 16,
+    backgroundColor: colors.white,
+  },
+  noMatchTxtContainer: {
+    flex: 1,
+    marginTop: 100,
+  },
+  noMatchTxt: {
+    fontFamily: Fonts.type.OpenSansExtraBold,
+    fontSize: 28,
+    color: colors.black,
+    marginHorizontal: 48,
+    textAlign: "center",
+    marginBottom: 24,
+  },
+  footerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingVertical: 12,
+    paddingRight: 12,
+  },
+  footerText: {
+    ...Fonts.style.openSans14SemiBold,
+  },
 });

@@ -1,4 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
@@ -6,6 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Platform } from "react-native";
+import CartScreen from "../Container/CartScreenContainer";
 import CategoriesPage from "../Container/CategoriesPage";
 import CustomDrawerContainer from "../Container/CustomDrawerContainer";
 import DeleteAccountCompleteScreen from "../Container/DeleteAccountCompleteContainer";
@@ -23,7 +23,6 @@ import HomeTabIcon from "./../Images/bottombarIcon/home.svg";
 import HomeTabIconBlack from "./../Images/bottombarIcon/homeBlack.svg";
 import ProfileTabIcon from "./../Images/bottombarIcon/profile.svg";
 import ProfileTabIconBlack from "./../Images/bottombarIcon/profileBlack.svg";
-import CartScreen from "../Container/CartScreenContainer";
 
 const HomeStack = createDrawerNavigator();
 

@@ -42,7 +42,7 @@ const DeleteAccountPasswordScreen = () => {
     if (formik.values.password === pass?.password) {
       navigation.navigate("DeleteAc");
     } else {
-      Alert.alert(t("login.errorTitle"));
+      Alert.alert(t("login.passerrorTitle"));
     }
   };
 

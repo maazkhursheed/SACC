@@ -73,6 +73,7 @@ const colors = {
   blue: "#043976",
   disabledBlue: "#336191",
   black: "#000000",
+  fadeblack: "#121010",
   darkGrey: "#666666",
   lightGrey: "#DDDDDD",
   offWhite: "#F5F5F5",

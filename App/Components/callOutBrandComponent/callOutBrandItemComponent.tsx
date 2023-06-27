@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { View, ViewProps } from "react-native";
@@ -14,13 +15,22 @@ interface OwnProps {
 
 type Props = OwnProps;
 const SignatureCollectionItemComponent: React.FunctionComponent<Props> = ({ item, containerStyle, direction }: Props) => {
+  const navigation = useNavigation();
   const { t } = useTranslation();
   const imgSource = item?.Image ? { uri: item?.Image } : { uri: imageUrl };
   return (
     <View style={[styles.contentItemWrapper, containerStyle]}>
       <FastImage source={imgSource} style={styles.image} resizeMode={FastImage.resizeMode.stretch} />
       <BottomFixedButton
-        onPress={() => {}}
+        onPress={() => {
+          const payload = {
+            screen: "MainPLP",
+            categoryId: `:relevance:brand:${item?.categoryId}`,
+            categoryName: item?.name ?? "",
+            direction: "calloutBrand",
+          };
+          navigation.navigate("ProductsListing", payload);
+        }}
         btnText={t("shopNow")}
         style={styles.btnwrapper}
         {...accessibility("calloutShopButton")}

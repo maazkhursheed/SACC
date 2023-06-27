@@ -15,3 +15,8 @@ export enum Token {
   RefreshTokenKey = "REFRESH_TOKEN_KEY",
   PasswordTokenKey = "PASSWORD_TOKEN_KEY",
 }
+
+export interface FailureRequestParam {
+  action: any;
+  response: any;
+}

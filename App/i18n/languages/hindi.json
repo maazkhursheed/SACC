@@ -1,10 +1,8 @@
 {
   "translation": {
-    "login.username": "उपयोगकर्ता नाम",
     "login.password": "पासवर्ड",
     "login.usernamePlaceholder": "Enter username",
     "login.passwordPlaceholder": "उपयोगकर्ता नाम दर्ज करें",
-    "login.selLang": "ऐप में चयनित भाषा %{selLang} है",
     "ChangeLang": "भाषा बदलें",
     "Close": "बंद करना"
   }

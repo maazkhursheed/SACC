@@ -1,4 +1,4 @@
-package com.royalcyber.sacc.newarchitecture.components;
+package com.saac.skysales.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

@@ -13,6 +13,7 @@ type SolrSuccessCallback = (page: number) => void;
 const actionCreators = {
   requestSearchSolr: createStandardAction("REQUEST_SOLR_SEARCH")<ISearchSolrParams | undefined, SolrSuccessCallback | undefined>(),
   success: createStandardAction("PRODUCT_SUCCESS")<any, string>(),
+  updatedSearchList: createStandardAction("UPDATED_PRODUCT_LIST")<any, string>(),
   failure: createStandardAction("PRODUCT_FAILURE")<FailureRequestParam>(),
   clearProductList: createStandardAction("CLEARE_PRODUCT_LIST")(),
 };
@@ -50,13 +51,6 @@ export const INITIAL_STATE: ImmutableProductState = SI.from({
   data: undefined,
   dataSearch: undefined,
   fetching: false,
-  productDetails: undefined,
-  productDetailsLoader: false,
-  facets: undefined,
-  isShowReset: false,
-  fetchingTopCategoryProducts: false,
-  substituteAlternateProducts: undefined,
-  substituteRelatedProducts: undefined,
 });
 /* ------------- Reducers ------------- */
 // @ts-ignore
@@ -81,6 +75,15 @@ export const success: Reducer<ImmutableProductState> = (state: ImmutableProductS
   }
 };
 
+export const updatedSearchList: Reducer<ImmutableProductState> = (state: ImmutableProductState, action: AnyAction & { payload?: any; meta: any }) => {
+  const data = {
+    data: { products: action.payload },
+    dataSearch: { products: action.payload },
+    fetching: false,
+  };
+  return state.merge(data);
+};
+
 export const clearProductList: Reducer<ImmutableProductState> = state => state.merge({ data: undefined, dataSearch: undefined, fetching: false });
 
 /* ------------- Hookup Reducers To Types ------------- */
@@ -90,6 +93,7 @@ const reducerMap: ReducerMap<typeof actionCreators, ImmutableProductState> = {
   failure,
   requestSearchSolr: request,
   clearProductList,
+  updatedSearchList,
 };
 
 export const ProductReducer = mapReducers(INITIAL_STATE, reducerMap, actionCreators);

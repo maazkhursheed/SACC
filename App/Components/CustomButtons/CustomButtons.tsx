@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import * as React from "react";
 import BottomFixedButton from "../BottomFixedButton/BottomFixedButton";
+import BottomFixedButtonWithTouchOpacity from "../BottomFixedButtonWithTouchOpacity";
 import styles from "./CustomButtonsStyles";
 
 interface OwnProps {
@@ -23,7 +24,7 @@ const CustomButtons: React.SFC<Props> = ({ buttonText1, buttonText2, onSubmit }:
         style={styles.bottomCancelBtnContainer}
         textStyle={styles.cancelButton}
       />
-      <BottomFixedButton onPress={onSubmit} btnText={buttonText2} style={styles.bottomBtnContainer} textStyle={styles.secondButton} />
+      <BottomFixedButtonWithTouchOpacity onPress={onSubmit} btnText={buttonText2} style={styles.bottomBtnContainer} textStyle={styles.secondButton} />
     </>
   );
 };

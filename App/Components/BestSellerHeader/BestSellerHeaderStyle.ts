@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { Colors, Fonts } from "../../Themes";
 
 export default StyleSheet.create({
@@ -15,7 +15,7 @@ export default StyleSheet.create({
     color: Colors.black,
   },
   categoryHeaderWrapper: {
-    flex: 1,
+    width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
   },
@@ -23,5 +23,8 @@ export default StyleSheet.create({
     ...Fonts.style.openSans14Regular,
     color: Colors.purple,
     textDecorationLine: "underline",
+    paddingRight: Platform.OS === "ios" ? 30 : 30,
+    paddingLeft: Platform.OS === "ios" ? 0 : 35,
+    paddingTop: 5,
   },
 });

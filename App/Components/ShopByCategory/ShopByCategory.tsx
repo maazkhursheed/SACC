@@ -3,6 +3,7 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { FlatList } from "react-native";
 import { useSelector } from "react-redux";
+import { RootState } from "../../Reducers";
 import HeaderTitle from "../BestSellerHeader/BestSellerHeader";
 import LoadingView from "../LoadingView";
 import ShopByCategoryItem from "./ShopByCategoryItem/ShopByCategoryItem";

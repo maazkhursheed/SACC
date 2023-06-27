@@ -32,8 +32,7 @@ const SearchResultPageContainer: React.SFC<Props> = ({ route }: Props) => {
   let onEndReachedCalledDuringMomentum = true;
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedSortCode, setSelectedSortCode] = useState("");
-  const { products, searchPageCount, totalResults, loading, facets, data } = useSelector((state: RootState) => ({
-    data: state.product,
+  const { products, searchPageCount, totalResults, loading, facets, cartLoading, isWishListLoading } = useSelector((state: RootState) => ({
     products: state.product?.dataSearch ? state.product?.dataSearch?.products : state.product?.data ? state.product?.data?.products : [],
     searchPageCount: state.product?.dataSearch ? R.pathOr(0, ["product", "dataSearch", "pages"], state) : R.pathOr(0, ["product", "data", "pages"], state),
     totalResults: state.product?.dataSearch
@@ -41,6 +40,8 @@ const SearchResultPageContainer: React.SFC<Props> = ({ route }: Props) => {
       : R.pathOr(0, ["product", "data", "totalResults"], state),
     loading: state.product?.fetching,
     facets: state.product.facets ?? [],
+    cartLoading: state.cart.isLoading,
+    isWishListLoading: state?.wishList?.fetching,
   }));
   const callRootApi = () => {
     const data = route.params?.searchText;
@@ -91,6 +92,20 @@ const SearchResultPageContainer: React.SFC<Props> = ({ route }: Props) => {
   function onSortSelection(sort: any) {
     setSelectedSortCode(sort);
   }
+
+  const onPressWishListItem = result => {
+    const data = [];
+    products.map((val, index) => {
+      if (val?.SKU == result?.code) {
+        const temData = { ...val, inWishlist: result?.inWishlist };
+        data.push(temData);
+      } else {
+        data.push(val);
+      }
+    });
+    dispatch(ProductActions.updatedSearchList(data, ""));
+  };
+
   const renderHeader = () => {
     return (
       <View style={{ marginHorizontal: -16 }}>
@@ -107,9 +122,9 @@ const SearchResultPageContainer: React.SFC<Props> = ({ route }: Props) => {
     <>
       <MainContainer>
         <FullHeader />
-        <FilterComponent selectedSortCode={selectedSortCode} onSortingSelection={onSortSelection} />
+        <FilterComponent searchTerm={route.params?.searchText} selectedSortCode={selectedSortCode} onSortingSelection={onSortSelection} />
         <SearchHeader title={t("searchHeader")} subTitle={route.params?.searchText} onBackPress={onBackPress} />
-        <LoadingView style={styles.container} isLoading={loading && searchPageCount === 0}>
+        <LoadingView style={styles.container} isLoading={(loading && searchPageCount === 0) || cartLoading || isWishListLoading}>
           <Animated.FlatList
             showsVerticalScrollIndicator={false}
             contentContainerStyle={[totalResults > 0 && styles.listContainerStyle]}
@@ -118,7 +133,7 @@ const SearchResultPageContainer: React.SFC<Props> = ({ route }: Props) => {
             numColumns={1}
             bounces={false}
             renderItem={({ item }) => {
-              return <BestSellersCartItemComponent item={item} />;
+              return <BestSellersCartItemComponent item={item} onpressWishList={onPressWishListItem} direction={"SeachList"} />;
             }}
             onTouchStart={() => {
               onEndReachedCalledDuringMomentum = false;

@@ -65,6 +65,21 @@ const getSelectedLanguage = () => {
   return selLanguage?.[0];
 };
 
-export { isRTL, getSelectedLanguage, localizeImage };
+function getStringWithArguments(key, value, args) {
+  let translation = selLanguage?.[0]?.code === "en" ? LANGUAGES?.en?.translation[key] : LANGUAGES?.ar?.translation[key];
+  if (translation != "" && translation != undefined && translation != null) {
+    Object.entries(args).forEach(([replacementKey, replacementValue]) => {
+      translation = translation.replace(`%{${replacementKey}}`, replacementValue);
+      if (isRTL() === "rtl") {
+        translation = translation.replace(`{${replacementKey}}%`, replacementValue);
+      }
+    });
+  } else {
+    translation = key;
+  }
+  return translation;
+}
+
+export { isRTL, getSelectedLanguage, localizeImage, getStringWithArguments };
 
 export default i18n;

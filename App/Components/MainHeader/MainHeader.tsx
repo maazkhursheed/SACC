@@ -3,10 +3,9 @@ import React, { useCallback } from "react";
 import { Image, SafeAreaView, TouchableOpacity, View } from "react-native";
 import { isNotNilOrEmpty } from "~root/Lib/CommonHelper";
 import { accessibility } from "~root/Lib/DataHelper";
-import { isRTL } from "../../i18n";
+import { localizeImage } from "../../i18n";
 import BurgerLogo from "../../Images/HeaderLogo/BurgerLogo.svg";
 import SearchIcon from "../../Images/searchIcon/searchIcon.svg";
-import Images from "../../Themes/Images";
 import styles from "./MainHeaderStyle";
 interface OwnProps {
   onPressSearch?: any;
@@ -40,12 +39,7 @@ const MainHeader: React.SFC<Props> = ({ onPressSearch, children, style, isHam, i
             </TouchableOpacity>
           </View>
           <View style={styles.titleView}>
-            {/* <AppLogo/> */}
-            {isRTL() != "rtl" ? (
-              <Image resizeMode={"contain"} style={styles.image} source={Images.Logo} />
-            ) : (
-              <Image resizeMode={"contain"} style={styles.image} source={Images.LogoAr} />
-            )}
+            <Image resizeMode={"contain"} style={styles.image} source={localizeImage("Logo")} />
           </View>
           <View style={styles.bottomButtonContainer}>
             <TouchableOpacity style={styles.touchableOpacityStyle} {...accessibility("searchBar")} onPress={onPressSearch}>

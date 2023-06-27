@@ -13,5 +13,9 @@ export default StyleSheet.create({
   listContainerStyle: {
     paddingLeft: 16,
   },
-  containerStyle: { marginHorizontal: 16, marginTop: 30, marginBottom: 10 },
+  containerStyle: {
+    marginHorizontal: 16,
+    marginTop: 30,
+    marginBottom: 10,
+  },
 });

@@ -1,12 +1,15 @@
 import { StyleSheet } from "react-native";
-import { Colors } from "~root/Themes";
+import { Colors, Fonts } from "~root/Themes";
 
 export default StyleSheet.create({
-  contentContainer: { flex: 1, backgroundColor: "#fff" },
+  contentContainer: {
+    flex: 1,
+    backgroundColor: Colors.textLight,
+  },
   doneStyle: {
-    // ...Fonts.style.openSans16Regular,
+    ...Fonts.style.openSans16Regular,
     fontSize: 14,
-    color: Colors.lightBlue,
+    color: Colors.textLight,
   },
   headerStyle: {
     shadowColor: Colors.darkGrey,
@@ -16,30 +19,39 @@ export default StyleSheet.create({
     elevation: 2,
   },
   cancelStyle: {
-    // ...Fonts.style.openSans16Regular,
+    ...Fonts.style.openSans16Regular,
     fontSize: 14,
-    color: Colors.lightBlue,
-    marginHorizontal: 10,
-  },
-  reloadStyle: {
-    // ...Fonts.style.openSans16Regular,
-    fontSize: 14,
-    color: Colors.lightBlue,
-    marginHorizontal: 10,
+    color: Colors.textLight,
   },
   changeText: {
-    // ...Fonts.style.openSans16Regular,
+    ...Fonts.style.openSans16Regular,
     fontSize: 14,
     marginRight: 18,
-    color: Colors.lightBlue,
+    color: Colors.textLight,
   },
   ActivityIndicatorStyle: {
     flex: 1,
     justifyContent: "center",
   },
   headerTitleStyle: {
-    // ...Fonts.style.openSans18Bold,
+    ...Fonts.style.openSans18Bold,
     fontSize: 18,
-    color: Colors.black,
+    color: Colors.fadeblack,
   },
+  stgHeader: {
+    marginTop: 20,
+  },
+  headerContainerStyle: {
+    backgroundColor: Colors.fadeblack,
+    paddingBottom: 10,
+  },
+  nextTextBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginHorizontal: 10,
+  },
+  closeBtnStyle: {
+    marginTop: -20,
+  },
+  septaror: { marginHorizontal: 2 },
 });

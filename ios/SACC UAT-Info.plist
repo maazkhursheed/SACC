@@ -5,13 +5,13 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>SACC UAT</string>
+	<string>SkySales UAT</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
-	<string>13</string>
+	<string>6</string>
 	<key>CFBundleName</key>
 	<string>SACC UAT</string>
 	<key>CFBundlePackageType</key>
@@ -69,46 +69,14 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSAppleMusicUsageDescription</key>
-	<string> You should fill this in</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>You should fill this in</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Access camera</string>
 	<key>NSContactsUsageDescription</key>
-	<string>You should fill this in</string>
-	<key>NSFaceIDUsageDescription</key>
-	<string>You should fill this in</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string> You should fill this in</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string> You should fill this in</string>
-	<key>NSHomeKitUsageDescription</key>
-	<string> You should fill this in</string>
+	<string>SkySales will manage profile while having your contact description</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Program requires GPS to track cars and job orders</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string> You should fill this in</string>
-	<key>NSLocationUsageDescription</key>
-	<string> You should fill this in</string>
+	<string>SkySales requires location to help in checkout</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string> You should fill this in</string>
-	<key>NSMotionUsageDescription</key>
-	<string> You should fill this in</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string> You should fill this in</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>NSPhotoLibraryUsageDescription</string>
-	<key>NSRemindersUsageDescription</key>
-	<string> You should fill this in</string>
-	<key>NSSiriUsageDescription</key>
-	<string> You should fill this in</string>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string> You should fill this in</string>
-	<key>NSVideoSubscriberAccountUsageDescription</key>
-	<string> You should fill this in</string>
+	<string>SkySales requires location to help in checkout</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>

@@ -5,8 +5,9 @@ import { BottomFixedButton } from "../index";
 import styles from "./SocialMediaLoginStyle";
 export interface GoogleButtonProps {
   onPress?: () => void;
+  onSocialMediaClick: () => void;
 }
-const GoogleButton: React.SFC<GoogleButtonProps> = ({ onPress }: GoogleButtonProps) => {
+const GoogleButton: React.SFC<GoogleButtonProps> = ({ onPress, onSocialMediaClick }: GoogleButtonProps) => {
   useEffect(() => {
     GoogleSignin
       .configure
@@ -51,7 +52,7 @@ const GoogleButton: React.SFC<GoogleButtonProps> = ({ onPress }: GoogleButtonPro
     }
   };
 
-  return <BottomFixedButton onPress={() => googleLogin()} style={styles.iconWraaper} SVGIcon={GoogleSvg} svgstyle={{ width: 45, height: 45 }} />;
+  return <BottomFixedButton onPress={onSocialMediaClick} style={styles.iconWraaper} SVGIcon={GoogleSvg} svgstyle={{ width: 45, height: 45 }} />;
 };
 
 export default GoogleButton;

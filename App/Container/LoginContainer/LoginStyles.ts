@@ -10,7 +10,7 @@ export default StyleSheet.create({
     flex: 1,
     paddingHorizontal: 30,
   },
-  headerSection: { marginTop: 50 },
+  headerSection: { marginTop: 30 },
   loginHeaderWrapper: { alignItems: "center" },
   loginHeaderText: { ...Fonts.style.openSans30Bold },
   loginSubText: { marginTop: 10, ...Fonts.style.openSans14SemiBoldGrey },

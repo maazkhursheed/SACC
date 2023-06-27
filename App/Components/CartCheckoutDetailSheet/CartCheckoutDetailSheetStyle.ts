@@ -37,7 +37,11 @@ export default StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  refineContainer: { flex: 1, flexDirection: "column" },
+  refineContainer: {
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "flex-start",
+  },
   refineButton: {
     backgroundColor: colors.black,
     padding: 10,

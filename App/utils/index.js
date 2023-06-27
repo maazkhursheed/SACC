@@ -3,13 +3,21 @@ import { Token } from "../Types/CommonTypes";
 export const setToken = async (action, response) => {
   try {
     await Keychain.setInternetCredentials(Token.AccessTokenKey, action.payload.username, response?.data?.access_token);
-    await Keychain.setInternetCredentials(Token.RefreshTokenKey, action.payload.username, response?.data?.refresh_token);
+    if (response?.data?.refresh_token) {
+      await Keychain.setInternetCredentials(Token.RefreshTokenKey, action.payload.username, response?.data?.refresh_token);
+    }
   } catch (error) {}
 };
 
 export const setPassword = async action => {
   try {
     await Keychain.setInternetCredentials(Token.PasswordTokenKey, action.payload.username, action.payload.password);
+  } catch (error) {}
+};
+
+export const setAnonymousToken = async (action, response) => {
+  try {
+    await Keychain.setInternetCredentials(Token.AccessTokenKey, "annonymous", response?.data?.access_token);
   } catch (error) {}
 };
 

@@ -32,4 +32,4 @@ const BestSellerHeader: React.SFC<Props> = ({ title, containerStyle, count, righ
   );
 };
 
-export default BestSellerHeader;
+export default React.memo(BestSellerHeader);

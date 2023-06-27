@@ -33,20 +33,37 @@ const ExpandableItemComponent: React.SFC<Props> = ({ item, onClickFunction, onCh
     }
   };
 
+  const ArrowDownButton = (...args: any) => {
+    const { onDropClick } = args[0];
+    return (
+      <TouchableOpacity style={styles.arrowDownContainer} onPress={() => onDropClick()}>
+        <DownArrowIcon style={styles.arrowDown} />
+      </TouchableOpacity>
+    );
+  };
+
+  const ChildArrowDownButton = (...args: any) => {
+    const { onDropClick, index, item, subItem } = args[0];
+    return (
+      <TouchableOpacity style={styles.arrowDownContainer} onPress={() => onDropClick(item, index, subItem)}>
+        <DownArrowIcon style={styles.arrowDown} />
+      </TouchableOpacity>
+    );
+  };
   return (
     <View>
-      <TouchableOpacity onPress={onClickFunction} style={styles.menuContainer}>
+      <TouchableOpacity onPress={() => onGrandChildClickFunction(item)} style={styles.menuContainer}>
         <Text style={styles.menuText}>{item.title}</Text>
-        {item?.children?.length > 0 && <DownArrowIcon />}
+        {item?.children?.length > 0 && <ArrowDownButton onDropClick={onClickFunction} />}
       </TouchableOpacity>
       <View style={{ height: layoutHeight, overflow: "hidden" }}>
         {item?.children?.length > 0 &&
           item?.children?.map((subItem, key) => {
             return (
               <View>
-                <TouchableOpacity onPress={() => onSubItemClick(item, key, subItem)} style={styles.childMenuItem} key={key}>
+                <TouchableOpacity onPress={() => onGrandChildClickFunction(subItem)} style={styles.childMenuItem} key={key}>
                   <Text style={styles.subMenuText}>{subItem.title}</Text>
-                  {subItem?.children?.length > 0 && <DownArrowIcon />}
+                  {subItem?.children?.length > 0 && <ChildArrowDownButton onDropClick={onSubItemClick} item={item} index={key} subItem={subItem} />}
                 </TouchableOpacity>
                 <View style={{ height: subItem.isExpanded ? subLayoutHeight : 0, overflow: "hidden" }}>
                   {subItem?.children?.length > 0 &&

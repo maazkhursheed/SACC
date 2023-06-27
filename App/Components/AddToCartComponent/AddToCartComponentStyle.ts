@@ -11,6 +11,7 @@ export default StyleSheet.create({
   },
   rowView: {
     flex: 1,
+    marginLeft: 12,
     marginRight: 12,
   },
   qtyView: {
@@ -24,14 +25,17 @@ export default StyleSheet.create({
   },
   productDescription: {
     ...Fonts.style.openSans14SemiBold,
+    textAlign: "left",
   },
   viewQtyValue: {
-    ...Fonts.style.openSans14SemiBold,
+    ...Fonts.style.openSans14SemiBoldPrice,
     color: colors.purple,
+    textAlign: "left",
   },
   discountValue: {
     marginTop: 8,
     ...Fonts.style.openSans12RegularGrey,
+    textAlign: "left",
   },
   productImageWrapper: {
     marginRight: 20,

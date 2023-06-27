@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { Colors, Fonts } from "../../Themes";
 
 export default StyleSheet.create({
-  marketingTileView: {
+  container: {
     flex: 1,
     backgroundColor: Colors.white,
   },

@@ -21,24 +21,8 @@
 		1D2DAC4929C7265100A72EAD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		39974E1E15E4A3379385303C /* libPods-SACCCommonPods-SACC UAT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD368FA54B904D1457FE0DD1 /* libPods-SACCCommonPods-SACC UAT.a */; };
 		525F3F2429DAD722006D5810 /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F1129DAD721006D5810 /* Roboto_medium.ttf */; };
-		525F3F2529DAD722006D5810 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F1229DAD721006D5810 /* MaterialIcons.ttf */; };
-		525F3F2629DAD722006D5810 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F1329DAD721006D5810 /* FontAwesome5_Brands.ttf */; };
-		525F3F2729DAD722006D5810 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F1429DAD721006D5810 /* FontAwesome.ttf */; };
-		525F3F2829DAD722006D5810 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F1529DAD721006D5810 /* EvilIcons.ttf */; };
-		525F3F2929DAD722006D5810 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F1629DAD721006D5810 /* MaterialCommunityIcons.ttf */; };
-		525F3F2A29DAD722006D5810 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F1729DAD722006D5810 /* Zocial.ttf */; };
-		525F3F2B29DAD722006D5810 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F1829DAD722006D5810 /* Fontisto.ttf */; };
-		525F3F2C29DAD722006D5810 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F1929DAD722006D5810 /* SimpleLineIcons.ttf */; };
-		525F3F2D29DAD722006D5810 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F1A29DAD722006D5810 /* Entypo.ttf */; };
-		525F3F2E29DAD722006D5810 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F1B29DAD722006D5810 /* AntDesign.ttf */; };
 		525F3F2F29DAD722006D5810 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F1C29DAD722006D5810 /* rubicon-icon-font.ttf */; };
-		525F3F3029DAD722006D5810 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F1D29DAD722006D5810 /* FontAwesome5_Regular.ttf */; };
-		525F3F3129DAD722006D5810 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F1E29DAD722006D5810 /* FontAwesome5_Solid.ttf */; };
-		525F3F3229DAD723006D5810 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F1F29DAD722006D5810 /* Ionicons.ttf */; };
-		525F3F3329DAD723006D5810 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F2029DAD722006D5810 /* Feather.ttf */; };
-		525F3F3429DAD723006D5810 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F2129DAD722006D5810 /* Octicons.ttf */; };
 		525F3F3529DAD723006D5810 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F2229DAD722006D5810 /* Roboto.ttf */; };
-		525F3F3629DAD723006D5810 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F2329DAD722006D5810 /* Foundation.ttf */; };
 		525F3F4629DAD739006D5810 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F3729DAD737006D5810 /* OpenSans-BoldItalic.ttf */; };
 		525F3F4729DAD739006D5810 /* fb-assets.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F3829DAD738006D5810 /* fb-assets.ttf */; };
 		525F3F4829DAD739006D5810 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 525F3F3929DAD738006D5810 /* OpenSans-Regular.ttf */; };
@@ -500,40 +484,24 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				525F3F4729DAD739006D5810 /* fb-assets.ttf in Resources */,
-				525F3F2729DAD722006D5810 /* FontAwesome.ttf in Resources */,
 				525F3F4D29DAD739006D5810 /* SFProDisplay-Regular.ttf in Resources */,
-				525F3F3229DAD723006D5810 /* Ionicons.ttf in Resources */,
 				525F3F5429DAD739006D5810 /* OpenSans-SemiboldItalic.ttf in Resources */,
-				525F3F3029DAD722006D5810 /* FontAwesome5_Regular.ttf in Resources */,
-				525F3F2E29DAD722006D5810 /* AntDesign.ttf in Resources */,
-				525F3F3629DAD723006D5810 /* Foundation.ttf in Resources */,
-				525F3F2A29DAD722006D5810 /* Zocial.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				525F3F2529DAD722006D5810 /* MaterialIcons.ttf in Resources */,
-				525F3F2C29DAD722006D5810 /* SimpleLineIcons.ttf in Resources */,
 				525F3F5329DAD739006D5810 /* OpenSans-Semibold.ttf in Resources */,
 				525F3F3529DAD723006D5810 /* Roboto.ttf in Resources */,
 				525F3F5229DAD739006D5810 /* OpenSans-Italic.ttf in Resources */,
 				525F3F2F29DAD722006D5810 /* rubicon-icon-font.ttf in Resources */,
-				525F3F3429DAD723006D5810 /* Octicons.ttf in Resources */,
-				525F3F2629DAD722006D5810 /* FontAwesome5_Brands.ttf in Resources */,
-				525F3F2D29DAD722006D5810 /* Entypo.ttf in Resources */,
-				525F3F2B29DAD722006D5810 /* Fontisto.ttf in Resources */,
 				525F3F4629DAD739006D5810 /* OpenSans-BoldItalic.ttf in Resources */,
-				525F3F2829DAD722006D5810 /* EvilIcons.ttf in Resources */,
 				525F3F2429DAD722006D5810 /* Roboto_medium.ttf in Resources */,
 				525F3F4C29DAD739006D5810 /* OpenSans-Light.ttf in Resources */,
 				525F3F4A29DAD739006D5810 /* proximanova-bold.ttf in Resources */,
 				525F3F4829DAD739006D5810 /* OpenSans-Regular.ttf in Resources */,
 				525F3F4B29DAD739006D5810 /* OpenSans-Bold.ttf in Resources */,
 				525F3F4F29DAD739006D5810 /* fb-icons.ttf in Resources */,
-				525F3F2929DAD722006D5810 /* MaterialCommunityIcons.ttf in Resources */,
-				525F3F3129DAD722006D5810 /* FontAwesome5_Solid.ttf in Resources */,
 				525F3F4E29DAD739006D5810 /* OpenSans-ExtraBold.ttf in Resources */,
 				A6F642E529FBF60B007508BC /* Google in Resources */,
 				525F3F4929DAD739006D5810 /* OpenSans-LightItalic.ttf in Resources */,
 				525F3F5029DAD739006D5810 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
-				525F3F3329DAD723006D5810 /* Feather.ttf in Resources */,
 				525F3F5129DAD739006D5810 /* SFProDisplay-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1095,9 +1063,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SACC/SACC.entitlements;
-				CURRENT_PROJECT_VERSION = 13;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 4;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = JPP2L47BNJ;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = K7XRL43X4H;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
@@ -1113,15 +1085,17 @@
 					"$(SDKROOT)/System/iOSSupport/usr/lib/swift",
 					"$(inherited)",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
 				PRESERVE_DEAD_CODE_INITS_AND_TERMS = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.royalcyber.sacc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.saac.skysales;
 				PRODUCT_NAME = SACC;
+				PROVISIONING_PROFILE_SPECIFIER = "SkySales Appstore Prod";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SkySales Appstore Prod";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1135,9 +1109,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SACC/SACC.entitlements;
-				CURRENT_PROJECT_VERSION = 13;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 4;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = JPP2L47BNJ;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = K7XRL43X4H;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SACC/Info.plist;
@@ -1152,15 +1130,17 @@
 					"$(SDKROOT)/System/iOSSupport/usr/lib/swift",
 					"$(inherited)",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
 				PRESERVE_DEAD_CODE_INITS_AND_TERMS = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.royalcyber.sacc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.saac.skysales;
 				PRODUCT_NAME = SACC;
+				PROVISIONING_PROFILE_SPECIFIER = "SkySales Appstore Prod";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "SkySales Appstore Prod";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1173,7 +1153,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SACC/SACC.entitlements;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = JPP2L47BNJ;
 				ENABLE_BITCODE = NO;
@@ -1211,7 +1191,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SACC/SACC.entitlements;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = JPP2L47BNJ;
 				INFOPLIST_FILE = "SACC SIT-Info.plist";
@@ -1247,7 +1227,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SACC/SACC.entitlements;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = JPP2L47BNJ;
 				ENABLE_BITCODE = NO;
@@ -1270,7 +1250,7 @@
 					"-lc++",
 				);
 				PRESERVE_DEAD_CODE_INITS_AND_TERMS = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.royalcyber.sacc.uat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.royalcyber.sacc.sit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1285,7 +1265,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SACC/SACC.entitlements;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = JPP2L47BNJ;
 				INFOPLIST_FILE = "SACC UAT-Info.plist";
@@ -1307,7 +1287,7 @@
 					"-lc++",
 				);
 				PRESERVE_DEAD_CODE_INITS_AND_TERMS = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.royalcyber.sacc.uat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.royalcyber.sacc.sit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

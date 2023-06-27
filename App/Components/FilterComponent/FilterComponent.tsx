@@ -12,14 +12,16 @@ import SortByComponent from "../SortByComponent/SortByComponent";
 interface OwnProps {
   onSortingSelection: (code: string) => void;
   selectedSortCode: string;
+  params: any;
+  searchTerm: string;
 }
 type Props = OwnProps;
-const FilterComponent: React.FunctionComponent<Props> = ({ onSortingSelection, selectedSortCode }: Props) => {
+const FilterComponent: React.FunctionComponent<Props> = ({ onSortingSelection, selectedSortCode, params, searchTerm }: Props) => {
   const { t } = useTranslation();
   const refRBSheet = useRef();
   const sortRBSheet = useRef();
   const { facets, sorts } = useSelector((state: RootState) => ({
-    facets: state.product?.data?.facets ?? [],
+    facets: state.product?.data?.facets ?? state.product?.dataSearch?.facets ?? [],
     sorts: state.product?.data?.sorts ?? state.product?.dataSearch?.sorts ?? [],
   }));
   const [facetQuery, setFacetQuery] = useState("");
@@ -70,13 +72,15 @@ const FilterComponent: React.FunctionComponent<Props> = ({ onSortingSelection, s
       >
         <RefineComponent
           facets={facets}
+          searchTerm={searchTerm}
           onBackPress={() => refRBSheet.current.close()}
           closeSheet={(updatedQuery: string) => {
             refRBSheet.current.close();
             setFacetQuery(updatedQuery);
-            console.log("Facet Query ", updatedQuery);
           }}
           currentQuery={facetQuery}
+          selectedSortCode={selectedSortCode}
+          params={params}
         />
       </RBSheet>
     </View>

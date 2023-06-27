@@ -23,16 +23,38 @@ export default StyleSheet.create({
     width: 112,
     height: 112,
   },
+  stockContainer: {
+    flexDirection: "row",
+    alignSelf: "center",
+    alignItems: "center",
+    marginTop: 10,
+  },
+  stockStyle: {
+    ...Fonts.style.openSans12Regular,
+    alignSelf: "center",
+    paddingHorizontal: 5,
+    color: "#707372",
+  },
+  leftStock: {
+    ...Fonts.style.openSans12Regular,
+    alignSelf: "center",
+    paddingLeft: 10,
+    color: "#6F263D",
+    marginTop: 5,
+  },
   productDescription: {
     marginTop: 24,
     ...Fonts.style.openSans14SemiBold,
+    textAlign: "left",
   },
   viewQtyValue: {
     ...Fonts.style.openSans14SemiBoldPrice,
+    textAlign: "left",
   },
   discountValue: {
     marginTop: 8,
     ...Fonts.style.openSans12RegularGrey,
+    textAlign: "left",
   },
   leftwrapper: {
     flexDirection: "row",
@@ -44,10 +66,6 @@ export default StyleSheet.create({
     alignItems: "center",
     position: "relative",
     flex: 1,
-  },
-  leftWrapperText: {
-    marginLeft: -65,
-    ...Fonts.style.openSans10SemiBoldWhite,
   },
   leftWrapper: {
     flex: 1,
@@ -86,4 +104,5 @@ export default StyleSheet.create({
     ...Fonts.style.openSans12Regular,
   },
   discountPrice: { textDecorationLine: "line-through" },
+  activityIndicator: { marginTop: 10 },
 });

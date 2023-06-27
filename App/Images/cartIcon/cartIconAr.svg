@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="28.268" viewBox="0 0 28.25 26.268">
+  <g id="Group_3901" data-name="Group 3901" transform="translate(-27 -1388.75)">
+    <g id="Group_3879" data-name="Group 3879" transform="translate(38 1394.927)">
+      <g id="Icon_feather-shopping-cart" data-name="Icon feather-shopping-cart" transform="translate(-10)">
+        <path id="Path_2336" data-name="Path 2336" d="M14.156,31.078A1.078,1.078,0,1,1,13.078,30,1.078,1.078,0,0,1,14.156,31.078Z" transform="translate(-5.755 -13.065)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Path_2337" data-name="Path 2337" d="M30.656,31.078A1.078,1.078,0,1,1,29.578,30,1.078,1.078,0,0,1,30.656,31.078Z" transform="translate(-12.813 -13.065)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Path_2338" data-name="Path 2338" d="M1.5,1.5H5.136L7.573,12.767a1.792,1.792,0,0,0,1.818,1.355h8.836a1.792,1.792,0,0,0,1.818-1.355L21.5,5.707H6.045" transform="translate(-1.5 -1.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+    </g>
+    <g id="Group_3900" data-name="Group 3900">
+      <line id="Line_332" data-name="Line 332" y2="8" transform="translate(50.5 1389.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1.5"/>
+      <line id="Line_333" data-name="Line 333" y1="8" transform="translate(54.5 1393.5) rotate(90)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1.5"/>
+    </g>
+  </g>
+</svg>

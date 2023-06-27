@@ -1,4 +1,4 @@
-import { useIsFocused } from "@react-navigation/native";
+import { useIsFocused, useRoute } from "@react-navigation/native";
 import * as R from "ramda";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -28,22 +28,24 @@ type Props = StateProps;
 const ProductListingContainer: React.SFC<Props> = ({ route, navigation }: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const myRoute = useRoute();
   let onEndReachedCalledDuringMomentum = true;
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedSortCode, setSelectedSortCode] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const isFocused = useIsFocused();
-  const { products, searchPageCount, totalResults, loading, facets } = useSelector((state: RootState) => ({
+  const { products, searchPageCount, totalResults, loading, facets, cartLoading, isWishListLoading } = useSelector((state: RootState) => ({
     products: state.product?.dataSearch ? state.product?.dataSearch?.products : state.product?.data ? state.product?.data?.products : [],
     searchPageCount: state.product?.dataSearch ? R.pathOr(0, ["product", "dataSearch", "pages"], state) : R.pathOr(0, ["product", "data", "pages"], state),
     totalResults: state.product?.dataSearch
       ? R.pathOr(0, ["product", "dataSearch", "totalResults"], state)
       : R.pathOr(0, ["product", "data", "totalResults"], state),
     loading: state.product?.fetching,
+    cartLoading: state.cart.isLoading,
     facets: state.product.facets ?? [],
+    isWishListLoading: state?.wishList?.fetching,
   }));
   const item = route?.params?.item;
-
   const params = route?.params;
 
   useEffect(() => {
@@ -112,6 +114,22 @@ const ProductListingContainer: React.SFC<Props> = ({ route, navigation }: Props)
     );
   };
 
+  const onPressWishListItem = result => {
+    const data = [];
+    products.map((val, index) => {
+      if (val?.SKU == result?.code) {
+        const temData = { ...val, inWishlist: result?.inWishlist };
+        data.push(temData);
+      } else {
+        data.push(val);
+      }
+    });
+    dispatch(ProductActions.updatedSearchList(data, ""));
+
+    const item = params?.categoryId;
+    apiCall({ query: item, currentPage: "0", sort: selectedSortCode }, 1);
+  };
+
   const scrollY = new Animated.Value(0);
   function onSortSelection(sort: any) {
     setSelectedSortCode(sort);
@@ -120,10 +138,15 @@ const ProductListingContainer: React.SFC<Props> = ({ route, navigation }: Props)
   return (
     <>
       <MainContainer>
-        <FullHeader />
-        {products?.length > 0 && <FilterComponent selectedSortCode={selectedSortCode} onSortingSelection={onSortSelection} />}
-        <SmallHeader onBackPress={onBackPress} title={route.params?.categoryName} subTitle={item?.title} containerStyle={styles.smallHeaderContainer} />
-        <LoadingView style={styles.container} isLoading={loading && searchPageCount === 0}>
+        <FullHeader myRoute={myRoute} />
+        {products?.length > 0 && <FilterComponent selectedSortCode={selectedSortCode} onSortingSelection={onSortSelection} params={params} />}
+        <SmallHeader
+          onBackPress={onBackPress}
+          title={route.params?.categoryName ?? ""}
+          subTitle={item?.title ?? ""}
+          containerStyle={styles.smallHeaderContainer}
+        />
+        <LoadingView style={styles.container} isLoading={(loading && searchPageCount === 0) || cartLoading || isWishListLoading}>
           <Animated.FlatList
             showsVerticalScrollIndicator={false}
             contentContainerStyle={[totalResults > 0 && styles.listContainerStyle]}
@@ -132,7 +155,7 @@ const ProductListingContainer: React.SFC<Props> = ({ route, navigation }: Props)
             numColumns={1}
             bounces={false}
             renderItem={({ item }) => {
-              return <BestSellersCartItemComponent item={item} direction={"PLPList"} />;
+              return <BestSellersCartItemComponent onpressWishList={onPressWishListItem} item={item} direction={"PLPList"} />;
             }}
             onTouchStart={() => {
               onEndReachedCalledDuringMomentum = false;

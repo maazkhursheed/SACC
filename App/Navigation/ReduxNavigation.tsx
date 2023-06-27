@@ -56,10 +56,6 @@ const ReduxNavigation = () => {
   const { isSignOut } = useSelector((state: RootState) => ({
     isSignOut: state.auth?.isSignOut,
   }));
-  const { isLoading, userToken } = useSelector((state: RootState) => ({
-    isLoading: state.auth?.isLoading,
-    userToken: state.auth?.userToken,
-  }));
 
   const getAccessToken = async () => {
     try {
@@ -68,6 +64,7 @@ const ReduxNavigation = () => {
       return undefined;
     }
   };
+
   React.useEffect(() => {
     setTimeout(async () => {
       let tkn = await getAccessToken();

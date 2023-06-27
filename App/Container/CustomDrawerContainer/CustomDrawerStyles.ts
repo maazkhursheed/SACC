@@ -8,6 +8,8 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
+  arrowDownContainer: { width: 90, height: 30, alignSelf: "center", justifyContent: "center" },
+  arrowDown: { alignSelf: "flex-end" },
   welcomeContainer: {
     marginTop: 50,
     paddingHorizontal: 20,

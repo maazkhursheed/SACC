@@ -3,13 +3,15 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { Text, TouchableOpacity, View } from "react-native";
 import FastImage from "react-native-fast-image";
+import { useSelector } from "react-redux";
+import AppConfig from "../../Config/AppConfig";
+import { getStringWithArguments } from "../../i18n";
 import Multiply from "../../Images/MultiplyIcon/multiply-line.svg";
 import { accessibility } from "../../Lib/DataHelper";
 import { imageUrl } from "../../Lib/StringHelper";
+import { RootState } from "../../Reducers";
 import styles from "../AddToCartComponent/AddToCartComponentStyle";
 import Divider from "../Divider";
-import PriceComponent from "../PriceComponent";
-
 interface OwnProps {
   item: any;
   onBackPress?: () => void;
@@ -18,18 +20,24 @@ interface OwnProps {
 type Props = OwnProps;
 
 const AddToCartComponent: React.FunctionComponent<Props> = ({ item, onBackPress }: Props) => {
-  const imgSource = item?.Image ? { uri: item?.Image } : { uri: imageUrl };
+  const imgSource = item?.images[2]?.url ? { uri: AppConfig.BASE_URL + item?.images[2]?.url } : { uri: imageUrl };
+  const { cart } = useSelector((state: RootState) => ({
+    cart: state?.cart?.cartData,
+  }));
   const { t } = useTranslation();
   const navigation = useNavigation();
+
   const onProceed = () => {
-    onBackPress();
     navigation.navigate("CartScreen");
+    if (onBackPress) {
+      onBackPress();
+    }
   };
   return (
     <>
       <View style={styles.subContainer}>
         <Text numberOfLines={1} style={styles.title}>
-          {"1 item added to cart"}
+          {t("oneItemAdd")}
         </Text>
         <TouchableOpacity onPress={onBackPress} {...accessibility("crossIcon")}>
           <Multiply style={styles.crossIcon} />
@@ -41,29 +49,23 @@ const AddToCartComponent: React.FunctionComponent<Props> = ({ item, onBackPress 
         </View>
         <View style={[styles.rowView]}>
           <Text numberOfLines={3} style={[styles.productDescription]} {...accessibility("productDetailsLabel")}>
-            {item?.ProductDescription ?? item?.product?.ProductDescription}
+            {item?.name ?? ""}
           </Text>
           <View style={[styles.qtyView]}>
             <View style={{ flex: 1, marginRight: 10 }}>
-              <PriceComponent style={styles.viewQtyValue} value={item?.Price} />
-              {item?.discountPrice ? (
+              <Text style={styles.viewQtyValue}>{item?.discount ? item?.discount?.discountPrice?.formattedValue : item?.price?.formattedValue}</Text>
+              {item?.discount?.discountPrice ? (
                 <View style={styles.discountValueWrapper}>
                   <View style={{ flex: 1 }}>
-                    <PriceComponent style={[styles.discountValue, styles.discountPrice]} value={item?.discountPrice} />
+                    <Text style={[styles.discountValue, { textDecorationLine: "line-through" }]}>{item?.price?.formattedValue}</Text>
                     <View style={styles.discountText}>
                       <Text style={[styles.discountValue]} {...accessibility("productDetailsLabel")}>
-                        {t("save")}{" "}
-                      </Text>
-                      <PriceComponent style={[styles.discountValue]} value={item?.savingPrice} />
-                      <Text style={styles.discountValue} {...accessibility("productDetailsLabel")}>
-                        {` (${item?.percentage}%)`}
+                        {getStringWithArguments("save", "", { savingPrice: item?.discount?.saving?.formattedValue })}
                       </Text>
                     </View>
                   </View>
                 </View>
-              ) : (
-                <></>
-              )}
+              ) : null}
             </View>
           </View>
         </View>
@@ -71,13 +73,13 @@ const AddToCartComponent: React.FunctionComponent<Props> = ({ item, onBackPress 
       <View style={{ paddingHorizontal: 16, paddingVertical: 20 }}>
         <Divider style={styles.divider} />
       </View>
-      <Text style={styles.itemsCount}>{"2 items in your cart"}</Text>
-      <Text style={styles.itemsTotalCount}>{"Subtotal: SAR 432.90"}</Text>
+      <Text style={styles.itemsCount}>{`${cart?.totalItems} ${t("itemsInCart")}`}</Text>
+      <Text style={styles.itemsTotalCount}>{`${t("Subtotal")}: ${cart?.totalPriceWithTax?.formattedValue}`}</Text>
       <TouchableOpacity style={styles.checkoutButton} onPress={onProceed}>
-        <Text style={styles.text}>{"VIEW CART & CHECKOUT"}</Text>
+        <Text style={styles.text}>{t("view&checkout")}</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.continueShopButton} onPress={onBackPress}>
-        <Text style={styles.textShop}>{"CONTINUE SHOPPING"}</Text>
+        <Text style={styles.textShop}>{t("continueShopping")}</Text>
       </TouchableOpacity>
     </>
   );

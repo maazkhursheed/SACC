@@ -72,10 +72,10 @@ android {
     flavorDimensions "default"
     productFlavors {
         prod {
-            // minSdkVersion rootProject.ext.minSdkVersion
-            // applicationId "com.royalcyber.sacc"
-            // targetSdkVersion rootProject.ext.targetSdkVersion
-            // resValue "string", "build_config_package", "com.royalcyber.sacc"
+            minSdkVersion rootProject.ext.minSdkVersion
+            applicationId "com.saac.skysales"
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            resValue "string", "build_config_package", "com.saac.skysales"
         }
         sit {
             minSdkVersion rootProject.ext.minSdkVersion
@@ -89,19 +89,18 @@ android {
             applicationId "com.royalcyber.sacc"
             targetSdkVersion rootProject.ext.targetSdkVersion
             resValue "string", "build_config_package", "com.royalcyber.sacc"
-            applicationIdSuffix '.uat'
+            applicationIdSuffix '.sit'
         }
     }
    // ---
 
     defaultConfig {
-        applicationId "com.royalcyber.sacc"
+        applicationId "com.saac.skysales"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 13
+        versionCode 9
         versionName "1.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
-        missingDimensionStrategy 'react-native-camera', 'general'
         multiDexEnabled true
         manifestPlaceholders = [
             appAuthRedirectScheme: "${applicationId}",

@@ -7,6 +7,7 @@ const { createAction, createStandardAction } = deprecated;
 
 const actionCreators = {
   signIn: createStandardAction("SIGN_IN")<any, IAlertCallbacks>(),
+  signInDirect: createStandardAction("SIGN_IN_DIRECT")<any, IAlertCallbacks>(),
   signInSuccess: createAction("SIGN_IN_SUCCESS"),
   signInFailure: createAction("SIGN_IN_FAILURE"),
   signOut: createAction("SIGN_OUT"),
@@ -37,6 +38,11 @@ export const INITIAL_STATE: ImmutableAuthState = SI.from({
 
 // @ts-ignore
 export const signIn: Reducer<ImmutableAuthState> = (state: ImmutableAuthState) =>
+  state.merge({
+    isLoading: true,
+  });
+// @ts-ignore
+export const signInDirect: Reducer<ImmutableAuthState> = (state: ImmutableAuthState) =>
   state.merge({
     isLoading: true,
   });
@@ -81,6 +87,7 @@ export const deleteAccountFailure: Reducer<ImmutableAuthState> = (state: Immutab
 
 const reducerMap: ReducerMap<typeof actionCreators, ImmutableAuthState> = {
   signIn,
+  signInDirect,
   signOut,
   signInSuccess,
   signInFailure,

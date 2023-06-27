@@ -5,8 +5,9 @@ import { BottomFixedButton } from "../index";
 import styles from "./SocialMediaLoginStyle";
 export interface FbLoginProps {
   onPress?: () => void;
+  onSocialMediaClick: () => void;
 }
-const FbLogin: React.SFC<FbLoginProps> = ({ onPress }: FbLoginProps) => {
+const FbLogin: React.SFC<FbLoginProps> = ({ onPress, onSocialMediaClick }: FbLoginProps) => {
   const [userInfo, setuserInfo] = useState({});
 
   const logoutWithFacebook = () => {
@@ -52,9 +53,9 @@ const FbLogin: React.SFC<FbLoginProps> = ({ onPress }: FbLoginProps) => {
 
   const buttonText = isLogin ? "Logout With Facebook" : "Login From Facebook";
 
-  const onPressButton = isLogin ? logoutWithFacebook : loginWithFacebook;
+  // const onPressButton = isLogin ? logoutWithFacebook : loginWithFacebook; will use it later
 
-  return <BottomFixedButton onPress={onPressButton} style={styles.iconWraaper} SVGIcon={FacebookSvg} svgstyle={{ width: 45, height: 45 }} />;
+  return <BottomFixedButton onPress={onSocialMediaClick} style={styles.iconWraaper} SVGIcon={FacebookSvg} svgstyle={{ width: 45, height: 45 }} />;
 };
 
 export default FbLogin;

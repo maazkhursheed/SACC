@@ -3,8 +3,11 @@ import * as R from "ramda";
 import * as RA from "ramda-adjunct";
 import { Dimensions, Platform } from "react-native";
 import { isNilOrEmpty, isTimberFlag, renameKeys } from "~root/Lib/CommonHelper";
+import AppConfig from "../../Config/AppConfig";
+import { getToken } from "../../utils";
+import { returnBearer } from "../ProfileHelper";
 
-const baseURL = "https://api.c1ydyig1w-saudiairl1-d1-public.model-t.cc.commerce.ondemand.com";
+const baseURL = AppConfig.BASE_URL;
 /**
  * Helper function to fetch the prop from db for the first instance of the table
  *
@@ -137,6 +140,8 @@ export const homePageRotatingBanner1Items = value => {
         title: val?.title,
         body: val?.content,
         Image: val?.media ? baseURL + val?.media?.mobile?.url : "",
+        name: val?.message ?? "",
+        categoryId: R.takeLast(1, R.split("/", R.pathOr("", ["urlLink"], val)))[0],
       };
       newArray.push(data);
     });
@@ -149,6 +154,8 @@ export const mapBrandBannerItems = value => {
     value.map((val, index) => {
       const data = {
         Image: val?.media ? baseURL + val?.media?.mobile?.url : "",
+        name: val?.title ?? "",
+        categoryId: R.takeLast(1, R.split("/", R.pathOr("", ["urlLink"], val)))[0],
       };
       newArray.push(data);
     });
@@ -162,6 +169,8 @@ export const mapBrandLogoItems = value => {
     value.map((val, index) => {
       const data = {
         Image: val?.media ? baseURL + val?.media?.mobile?.url : "",
+        name: val?.message ?? "",
+        categoryId: R.takeLast(1, R.split("/", R.pathOr("", ["urlLink"], val)))[0],
       };
       newArray.push(data);
     });
@@ -174,10 +183,10 @@ export const mapCategoriesItems = value => {
   if (RA.isNotNilOrEmpty(value)) {
     value.map((val, index) => {
       const data = {
-        categoryName: val?.name ?? "",
+        categoryName: val?.message ?? "",
         Image: val?.media ? baseURL + val?.media?.url : "",
         categoryId: R.takeLast(1, R.split("/", R.pathOr("", ["urlLink"], val)))[0],
-        name: val?.name,
+        name: val?.message,
       };
       newArray.push(data);
     });
@@ -194,6 +203,8 @@ export const mapSignatureCollectionrItems = value => {
         headline: val?.headline,
         Image: val?.media ? baseURL + val?.media?.url : "",
         message: val?.content,
+        name: val?.title ?? "",
+        categoryId: R.takeLast(1, R.split("/", R.pathOr("", ["urlLink"], val)))[0],
       };
       newArray.push(data);
     });
@@ -257,10 +268,10 @@ export const mapBestSellerItems = value => {
         inWishlist: val?.inWishlist,
         Image: val?.images?.length > 0 ? baseURL + val?.images[0].url : "",
         ProductDescription: val?.name,
-        Price: Number(Number(R.pathOr("0", ["price", "value"])(val)).toFixed(2)),
-        discountPrice: val?.discount?.discountPrice?.value ? Number(Number(R.pathOr("0", ["discount", "discountPrice", "value"])(val)).toFixed(2)) : 0,
+        Price: R.pathOr("0", ["price", "formattedValue"])(val),
+        discountPrice: val?.discount?.discountPrice?.formattedValue ? R.pathOr("0", ["discount", "discountPrice", "formattedValue"])(val) : 0,
         percentage: val?.discount?.percentage ? Number(Number(R.pathOr("0", ["discount", "percentage"])(val)).toFixed(2)) : 0,
-        savingPrice: val?.discount?.saving?.value ? Number(Number(R.pathOr("0", ["discount", "saving", "value"])(val)).toFixed(2)) : 0,
+        savingPrice: val?.discount?.saving?.formattedValue ? R.pathOr("0", ["discount", "saving", "formattedValue"])(val) : 0,
       };
       newArray.push(data);
     });
@@ -277,6 +288,8 @@ export const mapTilesItems = value => {
         title: val?.title ?? "",
         headline: val?.headline ?? "",
         body: val?.content ?? "",
+        name: val?.title ?? "",
+        categoryId: R.takeLast(1, R.split("/", R.pathOr("", ["urlLink"], val)))[0],
       };
       newArray.push(data);
     });
@@ -293,6 +306,8 @@ export const mappromotionalItems = value => {
         title: val?.title ?? "",
         headline: val?.headline ?? "",
         content: val?.content ?? "",
+        name: val?.title ?? "",
+        categoryId: R.takeLast(1, R.split("/", R.pathOr("", ["urlLink"], val)))[0],
       };
       newArray.push(data);
     });
@@ -345,7 +360,6 @@ export const mapHomeData = data => {
         newArray.featureCategories = CategoriesItems?.length > 0 ? CategoriesItems : [];
       } else if (val?.name == "Navigation Bar") {
         const NavigationItems = mapNavigationItems(R.pathOr(0, ["components", "component", 0, "navigationNode", "children"], val));
-        console.log("Navigation Items : ", NavigationItems);
         newArray.NavigationItems = NavigationItems?.length > 0 ? NavigationItems : [];
       }
     });
@@ -362,9 +376,9 @@ export const mapSanitizedItems = R.curry((state, value) => {
     ProductDescription: value?.Description,
     UOM: value?.UnitOfMeasure || "",
     Availability: value?.Stock,
-    Price: Number(Number(R.pathOr("0", ["Price"])(value)).toFixed(2)),
-    discountPrice: value?.discount?.discountPrice?.value ? Number(Number(R.pathOr("0", ["discount", "discountPrice", "value"])(value)).toFixed(2)) : 0,
-    savingPrice: value?.discount?.saving?.value ? Number(Number(R.pathOr("0", ["discount", "saving", "value"])(value)).toFixed(2)) : 0,
+    Price: R.pathOr("0", ["price", "formattedValue"])(value),
+    discountPrice: value?.discount?.discountPrice?.formattedValue ? R.pathOr("0", ["discount", "discountPrice", "formattedValue"])(value) : 0,
+    savingPrice: value?.discount?.saving?.formattedValue ? R.pathOr("0", ["discount", "saving", "formattedValue"])(value) : 0,
     percentage: value?.discount?.percentage ? Number(Number(R.pathOr("0", ["discount", "percentage"])(value)).toFixed(2)) : 0,
     Image: value?.Image,
     Brand: value?.Brand,
@@ -395,9 +409,8 @@ export const sanitizeSolrSearchForDb = obj =>
   R.compose(
     R.mergeRight({
       Brand: R.propOr("", "manufacturer")(obj),
-      // Image: R.compose(sanitizeImageUrl, R.pathOr("", ["images", "0", "url"]))(obj),
       Image: obj?.images?.length > 0 ? baseURL + R.pathOr("", ["images", "0", "url"])(obj) : "",
-      Price: R.compose(R.invoker(0, "toString"), R.invoker(1, "toFixed")(2), Number, R.pathOr("-", ["price", "value"]))(obj),
+      Price: R.pathOr("0", ["price", "formattedValue"])(obj),
       Stock: "100",
       pmStockData: R.prop("stock")(obj),
       IsTimberProduct: R.propOr(false, "timberProductFlag")(obj),
@@ -430,3 +443,31 @@ export const getPMMoreCategoriesTileSlot = R.compose(
   R.filter(R.propEq("slotId", "PMCategoryTilesSlot2")),
   R.pathOr([], ["contentSlots", "contentSlot"]),
 );
+
+export const getSanitizedListOfAllSuggestions = (data: any) => {
+  const suggestions = R.map(obj => R.assoc("name", obj.value, obj))(R.slice(0, 4, R.propOr([], "suggestions")(data)));
+  const assocList = (list: [any], assocKey: string, val: any) => list.map(R.assoc(assocKey, val));
+  const category = R.propOr([], "category")(data);
+  return R.flatten(R.prepend(assocList(suggestions, "isCategory", false), assocList(category, "isCategory", true)));
+};
+
+export const getSanitizedListOfSuggestions = (data: any) => {
+  return R.map(obj => {
+    obj = R.assoc("name", obj.value, obj);
+    return R.assoc("isCategory", false, obj);
+  })(R.propOr([], "suggestions")(data));
+};
+
+export const getUserParams = async () => {
+  const authToken = await getToken();
+  const obj = {
+    username: authToken?.username,
+    authToken: returnBearer(authToken?.password),
+  };
+  return obj;
+};
+
+export const isAnonymousLogin = async () => {
+  const tokenResponse = await getToken();
+  return tokenResponse?.username == "annonymous";
+};
